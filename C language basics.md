@@ -83,7 +83,8 @@ void printf(struct Product a){
     printf("原料：")；
     for(int i=0;i<p.cnt;i++){
         printf("%s ",material[i]);
-
+    }
+}
 int main(){
     struct Product prod1;
     prod1.price = 29.99;
