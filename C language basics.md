@@ -97,3 +97,8 @@ int main(){
 
     return 0;
 }
+```
+ps:此部分包含少量GPT成分，以下是个人结构体学习的部分心得
+## 结构体
++ 多使用typedef来简化
++ struct Person Person是结构体类型
