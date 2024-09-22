@@ -21,6 +21,22 @@ scanf("%d",&a);
     }else{
         n=1;
     }
-    
-    
+   ```
+关键字：if、else、else if 
+### switch case:
+```
+switch(type){   //type为整数类型
+    case 1：
+        ......;
+        break;
+    case 2:
+        ......;
+        break;
+    default:
+        ......;
+}
+```
+注：并不是必须每个case都需要break；
+
+   type的值与每个case后的常量比较，相同则执行语句，直到遇到break。 
     
