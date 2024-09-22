@@ -104,5 +104,5 @@ ps:此部分包含少量GPT成分，以下是个人结构体学习的部分心�
 + struct Person是结构体类型，而Person person1是结构体变量，与Person的结构相同
 + 作为函数参数时，格式：void f(Person person1){}，要带上Person
 + 字符数组：[]内的是字符长度减一，因为以\0结束；a[][]前一个为个数，后一个为字符长度
-+ strcpy()函数可将字符串常量复制到结构体中，需用#include<string>定义
++ strcpy()函数可将字符串常量复制到结构体中，需用string.h头文件定义
 + 结构体可以使用指针，用->访问结构体成员
