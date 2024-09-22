@@ -9,7 +9,7 @@ max(a,b){
         printf("%d",b);
     }
 }
-
+```
 ```
 scanf("%d",&a);
     if(a>999){
