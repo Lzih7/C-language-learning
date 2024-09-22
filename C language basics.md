@@ -70,7 +70,7 @@ do{
 #include<string.h>
 typedef struct{
     double price;
-    char catagory[80];
+    char category[80];
     char factory[80];
     char material[10][40];
     int cnt;
@@ -78,7 +78,7 @@ typedef struct{
 
 void printf(struct Product a){
     printf("价格：%lf\n",a.price);
-    printf("品种：%s\n",a.catagory);
+    printf("品种：%s\n",a.category);
     printf("生产厂家：%s\n",a.factory);
     printf("原料：")；
     for(int i=0;i<p.cnt;i++){
@@ -86,14 +86,14 @@ void printf(struct Product a){
     }
 }
 int main(){
-    struct Product prod1;
-    prod1.price = 29.99;
-    strcpy(prod1.category, "食品");
-    strcpy(prod1.manufacturer, "UESTC公司");
-    prod1.ingredient_count = 2;
-    strcpy(prod1.ingredients[0], "面粉");
-    strcpy(prod1.ingredients[1], "糖");
-    printProduct(prod1);
+    struct Product a;
+    a.price = 50.50;
+    strcpy(a.category, "食品");
+    strcpy(a.factory, "UESTC公司");
+    a.cnt = 2;
+    strcpy(a.material[0], "面粉");
+    strcpy(a.material[1], "糖");
+    prinf(a);
 
     return 0;
 }
