@@ -157,4 +157,38 @@ printf("b=%d",*q);
 # 2,8,16进制
 ## 进制换算
 二进制：每三位可换算八进制，每四位可换算十六进制
+```
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
 
+int main()
+{
+    int num1,num2,sum;
+    char *token;
+    char a[];
+    scanf("%s",a);
+    token=strtok(a,",");
+    if(token!=NULL){
+        printf("%s ",token);
+        num1=atoi(token)
+        token=strtok(NULL,",");
+    }
+    if(token!=NULL){
+        printf("%s",token);
+        num2=atoi(token);
+        sum=num1+num2;
+        printf("sum=%d",sum);
+    }
+    int array[32]={0};
+    int i=0;
+    while(sum>0){
+        array[i]=sum%2
+        sum/=2;
+        i++;
+    }
+    for(;i>=0;i--) {
+        printf("%d",array[i])n
+    }
+    return 0;
+}
