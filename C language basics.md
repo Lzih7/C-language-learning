@@ -187,7 +187,7 @@ int main()
         sum/=2;
         i++;
     }
-    for(;i>=0;i--) {
+    for(i-=1;i>=0;i--) {
         printf("%d",array[i])n
     }
     return 0;
