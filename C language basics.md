@@ -166,16 +166,16 @@ int main()
 {
     int num1,num2,sum;
     char *token;
-    char a[];
+    char a[10];
     scanf("%s",a);
     token=strtok(a,",");
     if(token!=NULL){
-        printf("%s ",token);
-        num1=atoi(token)
+        printf("%s ",*token);
+        num1=atoi(token);
         token=strtok(NULL,",");
     }
     if(token!=NULL){
-        printf("%s",token);
+        printf("%s",*token);
         num2=atoi(token);
         sum=num1+num2;
         printf("sum=%d",sum);
