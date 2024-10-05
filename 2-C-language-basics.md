@@ -2,38 +2,50 @@
 ## 1.1.条件控制
 ### if语句：
 ```c
-max(a,b){
-    if(a>b){
-        printf("%d",a);
-    }else{
-        printf("%d",b);
+void max(a, b)
+{
+    if (a > b)
+    {
+        printf("%d", a);
+    }
+    else
+    {
+        printf("%d", b);
     }
 }
 ```
 ```c
-scanf("%d",&a);
-    if(a>999){
-        n=4;
-    }else if(a>99){
-        n=3;
-    }else if(a>9){
-        n=2;
-    }else{
-        n=1;
-    }
+scanf("%d", &a);
+if (a > 999)
+{
+    n = 4;
+}
+else if (a > 99)
+{
+    n = 3;
+}
+else if (a > 9)
+{
+    n = 2;
+}
+else
+{
+    n = 1;
+}
    ```
 关键字：if、else、else if 
 ### switch case:
-```
-switch(type){   //type为整数类型
-    case 1：
-        ......;
-        break;
-    case 2:
-        ......;
-        break;
-    default:
-        ......;
+```c
+switch (type)
+{ // type为整数类型
+case 1:
+    //......;
+    break;
+case 2:
+    //......;
+    break;
+default:
+    //......;
 }
 ```
 注：并不是必须每个case都需要break；
@@ -43,32 +55,36 @@ switch(type){   //type为整数类型
 关键词：switch、case、default
 ## 1.2.循环语句
 ### while语句
-```
-while(){
-    ......;
+```c
+while ()
+{
+    //......;
 }
 ```
 ***符合条件，则进入循环，在循环进行前检验***
 ### for语句
-```
-for(i=1;i<n;i++){
-    ......;
+```c
+for (i = 1; i < n; i++)
+{
+   // ......;
 }
 ```
 ***任何for语句都能改写成while语句***
 ### do-while语句
-```
-do{
-    ......;
-}while();
+```c
+do
+{
+    //......;
+} while ();
 ```
 ***do-while语句在执行后检查***
 # 2.结构体的运用
 存放商品信息的一个结构体
-```
-#include<stdio.h>
-#include<string.h>
-typedef struct{
+```c
+#include <stdio.h>
+#include <string.h>
+typedef struct
+{
     double price;
     char category[80];
     char factory[80];
@@ -76,16 +92,18 @@ typedef struct{
     int cnt;
 } Product;
 
-void printf(struct Product a){
-    printf("价格：%lf\n",a.price);
-    printf("品种：%s\n",a.category);
-    printf("生产厂家：%s\n",a.factory);
-    printf("原料：")；
-    for(int i=0;i<p.cnt;i++){
-        printf("%s ",material[i]);
+void printf(struct Product a)
+{
+    printf("价格：%lf\n", a.price);
+    printf("品种：%s\n", a.category);
+    printf("生产厂家：%s\n", a.factory);
+    printf("原料：")； for (int i = 0; i < p.cnt; i++)
+    {
+        printf("%s ", material[i]);
     }
 }
-int main(){
+int main()
+{
     struct Product a;
     a.price = 50.50;
     strcpy(a.category, "食品");
@@ -142,53 +160,62 @@ stdio.h, string.h等
 **库函数使用需要包含对应的头文件**
 # 指针与地址
 指针类型的变量指向一个变量的地址，如`int *p=&a;`
-```
-int a=7;
-int b=5;
-int *p=&a;
-int *q=&b;
-int c=0;
-c=*p;
-*p=*q;
-*q=c;
-printf("a=%d",*p);
-printf("b=%d",*q);
+```c
+int a = 7;
+int b = 5;
+int *p = &a;//p的值是变量a的地址
+int *q = &b;//q值是变量b的地址
+int c = 0;
+c = *p;     //*p在等号右边，解引用后取值，赋值给变量c
+*p = *q;    //*q在等号右边, 解引用后取值, 
+            //*p在等号左边，解引用后寻址，然后把之前(*q)取到的值写到新的内存中
+*q = c;     //*q在等号左边, 解引用后寻址,然后把变量c的值写到新的内存中
+
+printf("a=%d\n", *p);
+printf("b=%d\n", *q);
 ```
 # 2,8,16进制
 ## 进制换算
 二进制：每三位可换算八进制，每四位可换算十六进制
-```
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int main()
 {
-    int num1,num2,sum;
-    char *token;
-    char a[10];
-    scanf("%s",a);
-    token=strtok(a,",");
-    if(token!=NULL){
-        printf("%s ",*token);
-        num1=atoi(token);
-        token=strtok(NULL,",");
-    }
-    if(token!=NULL){
-        printf("%s",*token);
-        num2=atoi(token);
-        sum=num1+num2;
-        printf("sum=%d",sum);
-    }
-    int array[32]={0};
-    int i=0;
-    while(sum>0){
-        array[i]=sum%2
-        sum/=2;
-        i++;
-    }
-    for(i-=1;i>=0;i--) {
-        printf("%d",array[i])n
-    }
-    return 0;
+	int num1=0, num2=0, sum=0;
+	char* token = NULL;
+	char a[10] = {0};
+	printf("please input 2 Numbers,e.g. 12,13\n");
+	scanf("%s", a);
+
+	token = strtok(a, ",");//字符数组a中的","会被替换成"\0"
+	if (token != NULL)
+	{
+		printf("num1=%s\n", token); //token指向原,左边的字符串
+		num1 = atoi(token);         //字符串转换成数字
+		token = strtok(NULL, ",");
+	}
+	if (token != NULL)
+	{
+		printf("num2=%s\n", token); //token指向原,左边的字符串
+		num2 = atoi(token);         //字符串转换成数字
+		sum = num1 + num2;
+		printf("sum=%d\n", sum);
+	}
+	int array[32] = { 0 };
+	int i = 0;
+	while (sum > 0)
+	{
+		array[i] = sum % 2;
+		sum /= 2;
+		i++;
+	}
+	for (i -= 1; i >= 0; i--)
+	{
+		printf("%d", array[i]);
+	}
+	return 0;
 }
+```
