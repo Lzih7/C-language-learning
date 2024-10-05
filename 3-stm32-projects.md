@@ -40,7 +40,6 @@ int main(void)
 }
 
 ```
-[下载stm32_led_with_lib](./files/stm32_led_with_lib.zip)
 
 
 ## 用按键实现 LED 的可控闪烁
