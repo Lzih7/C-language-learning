@@ -81,39 +81,47 @@ do
 # 2.结构体的运用
 存放商品信息的一个结构体
 ```c
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <string.h>
-typedef struct
+typedef struct Product
 {
-    double price;
-    char category[80];
-    char factory[80];
-    char material[10][40];
-    int cnt;
+	double price;
+	char category[80];
+	char factory[80];
+	char material[10][40];
+	int cnt;
 } Product;
 
-void printf(struct Product a)
+void show(Product product)
 {
-    printf("价格：%lf\n", a.price);
-    printf("品种：%s\n", a.category);
-    printf("生产厂家：%s\n", a.factory);
-    printf("原料：")； for (int i = 0; i < p.cnt; i++)
-    {
-        printf("%s ", material[i]);
-    }
+	printf("价格：%lf\n", product.price);
+	printf("品种：%s\n", product.category);
+	printf("生产厂家：%s\n", product.factory);
+	printf("原料：");
+	for (int i = 0; i < product.cnt; i++)
+	{
+		printf("%s ", product.material[i]);
+	}
 }
 int main()
 {
-    struct Product a;
-    a.price = 50.50;
-    strcpy(a.category, "食品");
-    strcpy(a.factory, "UESTC公司");
-    a.cnt = 2;
-    strcpy(a.material[0], "面粉");
-    strcpy(a.material[1], "糖");
-    prinf(a);
+	Product a = { 0 };	//a是main函数中的局部变量。
+	a.price = 50.50;
+	strcpy(a.category, "食品");
+	strcpy(a.factory, "UESTC公司");
+	a.cnt = 2;
+	strcpy(a.material[0], "面粉");
+	strcpy(a.material[1], "糖");
+	show(a);		/**
+					调用函数show,传递了a这个变量，
+					C语言调用函数是按值传递
+					运行到show之后第一件事就是接受外部传递的参数值
+					这个值是一个结构体，所以在show中胡会生成这个结构体一份拷贝
+					*/
 
-    return 0;
+	return 0;
 }
 ```
 以下是个人结构体学习的部分心得
