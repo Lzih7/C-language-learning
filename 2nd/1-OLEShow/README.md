@@ -3,7 +3,7 @@
 • ⽬标：驱动 OLED显⽰屏 ，并显⽰你的学号  
 • 提⽰：直接使⽤他⼈提供的函数完成即可  
 
-
+## 接线图
 ![电路](files/OLED显示屏.jpg)
 
 OLED SCL 接在PB8  
@@ -50,6 +50,7 @@ OLED 显示屏通过 I²C 接口接收来自主控制器的指令，控制屏幕
 
 共有3个文件
 **OLED.h OLED.c OLED_Font.h**  
+工程目录下新建一个文件夹`Driver`,把这3个文件cp过去，在keil的include path中需要增加这个Driver的路径。
 
 有如下API可以用
 ```c
