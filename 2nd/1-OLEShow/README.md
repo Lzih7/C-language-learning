@@ -1,13 +1,13 @@
 # OLED驱动显⽰学号
 
-• ⽬标：驱动 OLED显⽰屏 ，并显⽰你的学号
-• 提⽰：直接使⽤他⼈提供的函数完成即可
+• ⽬标：驱动 OLED显⽰屏 ，并显⽰你的学号  
+• 提⽰：直接使⽤他⼈提供的函数完成即可  
 
 
 ![电路](files/OLED显示屏.jpg)
 
-OLED SCL 接在PB8
-OLED SDA 接在PB9
+OLED SCL 接在PB8  
+OLED SDA 接在PB9  
 
 ---
 
