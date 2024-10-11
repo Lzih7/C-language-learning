@@ -1,5 +1,5 @@
-#include "stm32f10x.h" // Device header
-#include "stm32_util.h"
+#include "stm32f10x.h"  // Device header
+#include "stm32_util.h" // My Utility
 
 static uint8_t FORWARD = 0;
 static uint8_t BACKWARD = 1;
@@ -8,7 +8,7 @@ static uint8_t led_enabled = 1; // LED 开关状态
 static uint16_t pwm_value = 0;
 static uint8_t breathing_direction = 0;
 
-void TIM2_PWM_Init()
+void TIM2_PWM_Init_Custom()
 {
     /*TIM2 属于低速定时器，时钟源来自于 APB1 总线，通过 APB1 外设时钟使能*/
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
@@ -29,22 +29,27 @@ void TIM2_PWM_Init()
 
     /*
      * 配置 PWM 模式
-     * 目标是 TIM2, channel = 1
+     * 目标是 TIM2_CH1设置为TIM_OCMode_PWM1模式，OCMode(Output Compare Mode)
      *
-     * TIM_OCMode=TIM_OCMode_PWM1;在 PWM 模式 1 下，输出比较寄存器（CCR）的值决定了信号的占空比
-     * TIM_OutputState=TIM_OutputState_Enable
-     * TIM_Pulse = 0
-     * TIM_OCPolarity=TIM_OCPolarity_High
+     * TIM2_CH1 => PA0
+     * TIM2_CH2 => PA1
+     * TIM2_CH3 => PA2
+     * TIM2_CH4 => PA3
+     *
+     * TIM_OCMode       = TIM_OCMode_PWM1;在 PWM模式1下，输出比较寄存器(CCR)的值决定了信号的占空比
+     * TIM_OutputState  = TIM_OutputState_Enable
+     * TIM_Pulse        = 0
+     * TIM_OCPolarity   = TIM_OCPolarity_High
      *
      */
     UTIL_TIM_PWM_CFG(TIM2, 1,
                      /* TIM_OCInitStructure */
-                     TIM_OCMode_PWM1, TIM_OutputState_Enable, 900, TIM_OCPolarity_High);
+                     TIM_OCMode_PWM1, TIM_OutputState_Enable, 0, TIM_OCPolarity_High);
 
     TIM_Cmd(TIM2, ENABLE); /* 启动 TIM2*/
 }
 
-void GPIO_REF_Init(void)
+void GPIO_Init_Custom(void)
 {
     // 使能 GPIO 时钟
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB, ENABLE);
@@ -60,7 +65,7 @@ void GPIO_REF_Init(void)
                   GPIO_Pin_11, GPIO_Mode_IPU, GPIO_Speed_50MHz);
 }
 
-void EXTI_Config(void)
+void EXTI_Init_Custom(void)
 {
     /*使能 AFIO 时钟*/
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
@@ -69,9 +74,10 @@ void EXTI_Config(void)
     GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, GPIO_PinSource11);
 
     /**
-     * EXTI_Line=EXTI_Line11;
-     * EXTI_Mode = Interrupt;
+     * EXTI_Line    = EXTI_Line11;
+     * EXTI_Mode    = Interrupt;
      * EXTI_Trigger = Falling;下降沿触发
+     * EXTI_LineCmd = ENABLE
      */
     UTIL_EXTI_CFG(EXTI_Line11,
                   /* EXTI_InitTypeDef */
@@ -80,11 +86,12 @@ void EXTI_Config(void)
     /**
      * 配置中断优先级
      *
-     * NVIC_IRQChannel=EXTI15_10_IRQn; ̰ ̰
+     * NVIC_IRQChannel           = EXTI15_10_IRQn;
      * ChannelPreemptionPriority = 0;
-     * ChannelSubPriority = 0;
+     * ChannelSubPriority        = 0;
      */
-    UTIL_NVIC_CFG(EXTI15_10_IRQn, 0, 0, ENABLE);
+    UTIL_NVIC_CFG(EXTI15_10_IRQn,
+                  /* NVIC_InitTypeDef */ 0, 0, ENABLE);
 }
 
 void EXTI15_10_IRQHandler(void)
@@ -114,7 +121,7 @@ void Breathe_LED(void)
         }
 
         // 调整 TIM2 通道 1 的比较值，改变占空比
-        // TIM_SetCompare1(TIM2, pwm_value);
+        TIM_SetCompare1(TIM2, pwm_value);
     }
     else
     {
@@ -125,13 +132,20 @@ void Breathe_LED(void)
 
 int main(void)
 {
-    GPIO_REF_Init(); // 初始化GPIO
-    TIM2_PWM_Init(); // 初始化TIM2的PWM，1kHz的PWM频率
-    EXTI_Config();   // 配置按键外部中断
+    GPIO_Init_Custom();     // 初始化GPIO
+    TIM2_PWM_Init_Custom(); // 初始化TIM2的PWM
+    EXTI_Init_Custom();     // 配置按键外部中断
 
     while (1)
     {
-        Breathe_LED();      // 控制 LED 呼吸灯
-        Delay_us(1 * 1000); // 调整呼吸速度
+        Breathe_LED(); // 控制 LED 呼吸灯
+
+        Delay_us(500); /**
+                        *
+                        * 目标是：1s 完成呼吸一次，暗变亮->亮变暗
+                        * 调整呼吸速度, main函数中 0.5ms(毫秒) 调度一次 Breathe_LED()
+                        * 1s 调度2000次，占空比的变化是: 0->999 然后 999->0
+                        *
+                        */
     }
 }
