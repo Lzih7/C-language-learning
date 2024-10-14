@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "stm32_util.h"
 
 void Delay_us(uint32_t xus)

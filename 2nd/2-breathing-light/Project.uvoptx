@@ -150,18 +150,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>175</LineNumber>
+          <LineNumber>17</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134218882</Address>
+          <Address>134220450</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\Library\stm32f10x_gpio.c</Filename>
+          <Filename>.\User\stm32_util.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Project\Library/stm32f10x_gpio.c\175</Expression>
+          <Expression>\\Project\User/stm32_util.c\17</Expression>
         </Bp>
       </Breakpoint>
       <Tracepoint>
@@ -217,7 +217,7 @@
 
   <Group>
     <GroupName>Start</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

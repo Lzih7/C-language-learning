@@ -14,7 +14,7 @@ void Delay_us(uint32_t xus);
  * _Speed   : GPIO 引脚速度等级，用于配置引脚信号的切换速率（如 GPIO_Speed_10MHz, GPIO_Speed_50MHz 等）。
  *
  */
-#define UTIL_GPIO_CFG(GPIOx, _Pin, _Mode, _Speed) \
+#define UTIL_GPIO_CFG(GPIOx, _Pin, _Speed, _Mode) \
     do                                            \
     {                                             \
         GPIO_InitTypeDef GPIO_InitStructure;      \
@@ -37,14 +37,14 @@ void Delay_us(uint32_t xus);
  * _Speed : 将 Speed 参数拼接为 GPIO_Speed_X 格式，设置 GPIO 引脚的速度，如低速、中速或高速。
  *
  */
-#define UTIL_GPIO_CFG_EX(_GPIOx, _Pin, _Mode, _Speed)        \
+#define UTIL_GPIO_CFG_EX(_x, _Pin, _Speed, _Mode)            \
     do                                                       \
     {                                                        \
         GPIO_InitTypeDef GPIO_InitStructure;                 \
         GPIO_InitStructure.GPIO_Pin = GPIO_Pin_##_Pin;       \
         GPIO_InitStructure.GPIO_Mode = GPIO_Mode_##_Mode;    \
         GPIO_InitStructure.GPIO_Speed = GPIO_Speed_##_Speed; \
-        GPIO_Init(_GPIOx, &GPIO_InitStructure);              \
+        GPIO_Init(GPIO##_x, &GPIO_InitStructure);            \
     } while (0)
 
 /**
