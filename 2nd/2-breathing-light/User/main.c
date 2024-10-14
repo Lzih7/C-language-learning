@@ -1,10 +1,10 @@
 #include "stm32f10x.h"  // Device header
 #include "stm32_util.h" // My Utility
 
-static uint8_t FORWARD = 0;  // LED变亮的方向
-static uint8_t BACKWARD = 1; // LED变暗的方向
+static uint8_t Positive = 0; // LED变亮的方向
+static uint8_t Negative = 1; // LED变暗的方向
 
-static uint8_t led_enabled = 1; // LED 开关状态
+static uint8_t led_on = 1; // LED 开关状态
 static uint16_t brightness = 0;
 static uint8_t breathing_direction = 0;
 
@@ -74,26 +74,26 @@ void EXTI0_IRQHandler(void)
 {
     if (EXTI_GetITStatus(EXTI_Line0) != RESET)
     {
-        led_enabled = !led_enabled;         // 切换 LED 开关状态
+        led_on = !led_on;                   // 切换 LED 开关状态
         EXTI_ClearITPendingBit(EXTI_Line0); // 清除中断标志
     }
 }
 
 void Breathe_LED(void)
 {
-    if (led_enabled)
+    if (led_on)
     {
-        if (breathing_direction == FORWARD)
+        if (breathing_direction == Positive)
         {
             brightness++;
             if (brightness >= 999)
-                breathing_direction = BACKWARD;
+                breathing_direction = Negative;
         }
         else
         {
             brightness--;
             if (brightness == 0)
-                breathing_direction = FORWARD;
+                breathing_direction = Positive;
         }
 
         TIM_SetCompare1(TIM2, brightness); // 调整 TIM2 通道 1 的比较值，改变占空比
