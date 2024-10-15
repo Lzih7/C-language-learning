@@ -12,12 +12,12 @@
 
 ---
 
-## **硬件连接**
+## 硬件连接
    - **2个LED**：分别连接到 `PA0` 和 `PA1` 引脚。
    - **按键1**：连接到 `PB0` 引脚，用作控制 LED 呼吸灯的开关。
    - **按键2**：连接到 `PB10` 引脚，用作切换LED工作模式。
    
-## **LED 以2Hz频率闪烁**
+## LED 以2Hz频率闪烁
 每秒闪烁2次，如下时序可以达到要求
 `亮 -> delay 250ms -> 灭 -> delay 250ms`
 `亮 -> delay 250ms -> 灭 -> delay 250ms`
@@ -87,7 +87,7 @@ void EXTI15_10_IRQHandler(void)
 
 ---
 
-附上核心代码
+## 核心代码
 ```c
 #include "stm32f10x.h"  // Device header
 #include "stm32_util.h" // My Utility
