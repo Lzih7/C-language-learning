@@ -69,6 +69,17 @@ void Delay_us(uint32_t xus);
         TIM_TimeBaseInit(_TIMX, &TIM_TimeBaseStructure);                            \
     } while (0)
 
+#define UTIL_TIM_BASE_EX(_TIMX, _Period, _Prescaler, _ClockDivision, _CounterMode) \
+    do                                                                             \
+    {                                                                              \
+        TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;                             \
+        TIM_TimeBaseStructure.TIM_Period = _Period;                                \
+        TIM_TimeBaseStructure.TIM_Prescaler = _Prescaler;                          \
+        TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_##_ClockDivision;        \
+        TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_##_CounterMode;    \
+        TIM_TimeBaseInit(_TIMX, &TIM_TimeBaseStructure);                           \
+    } while (0)
+
 /**
  * 简化了 PWM 输出的配置。你可以通过传入定时器实例、通道编号、输出比较模式、输出状态、占空比和极性，快速设置定时器的 PWM 输出功能。
  * 该宏定义支持灵活地选择定时器的不同通道，并且通过拼接 _OCX，支持 OC1, OC2, OC3 或 OC4 通道的配置
@@ -96,6 +107,17 @@ void Delay_us(uint32_t xus);
         TIM_OCInitStructure.TIM_Pulse = _Pulse;                                   \
         TIM_OCInitStructure.TIM_OCPolarity = _OCPolarity;                         \
         TIM_OC##_OCX##Init(_TIMX, &TIM_OCInitStructure);                          \
+    } while (0)
+
+#define UTIL_TIM_PWM_EX(_TIMX, _OCX, _OCMode, _OutputState, _Pulse, _OCPolarity) \
+    do                                                                           \
+    {                                                                            \
+        TIM_OCInitTypeDef TIM_OCInitStructure;                                   \
+        TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_##_OCMode;                   \
+        TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_##_OutputState;    \
+        TIM_OCInitStructure.TIM_Pulse = _Pulse;                                  \
+        TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_##_OCPolarity;       \
+        TIM_OC##_OCX##Init(_TIMX, &TIM_OCInitStructure);                         \
     } while (0)
 
 /**
@@ -140,7 +162,7 @@ void Delay_us(uint32_t xus);
  * _LineCmd : 直接传入用于启用或禁用 EXTI 线路的宏参数，通常是 ENABLE 或 DISABLE。
  *
  */
-#define UTIL_EXTI_CFG_EX(_X, _MODE, _Trigger, _LineCmd)            \
+#define UTIL_EXTI_EX(_X, _MODE, _Trigger, _LineCmd)                \
     do                                                             \
     {                                                              \
         EXTI_InitTypeDef EXTI_InitStructure;                       \
