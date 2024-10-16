@@ -1,9 +1,10 @@
 /**
  *
- * 目标:按下 按键2(PB10) 后 5s 内 LED 闪烁，之后⾃动切换为呼吸灯模式
- * 提示:使用TIM 的定时中断功能来实现 LED 闪烁
+ * 目标:利⽤上位机(手机)向蓝⽛发送数据 ，并将接收到的数据显⽰在 OLED屏幕 上
+ * 数据包格式是command+\n; e.g. "switch\n"
  *
  */
+#include <string.h>
 #include "stm32f10x.h"  // Device header
 #include "stm32_util.h" // My Utility
 
@@ -20,7 +21,7 @@ static char rxBuffer[256] = {0};        /*receive buffer*/
 static int bufferIndex = 0;
 
 void LED_Blink(void);
-
+void ProcessReceivedData(void);
 void Resource_Init(void)
 {
     /*GPIO 配置 START----------------------------------------------------------------------------------------*/
@@ -63,8 +64,8 @@ void Resource_Init(void)
     /*TIM 配置 END----------------------------------------------------------------------------------------------*/
 
     /*UART START-----------------------------------------------------------------------------------------------*/
-    UTIL_USART_CFG(9600, USART_WordLength_8b, USART_StopBits_1, USART_Parity_No, USART_HardwareFlowControl_None, //
-                   USART_Mode_Rx | USART_Mode_Tx);
+    UTIL_USART_CFG(9600, USART_WordLength_8b, USART_StopBits_1, USART_Parity_No, //
+                   USART_HardwareFlowControl_None, USART_Mode_Rx | USART_Mode_Tx);
     USART_Cmd(USART1, ENABLE);
     USART_ITConfig(USART1, USART_IT_RXNE, ENABLE); /*使能 USART1 接收中断*/
 
@@ -116,30 +117,41 @@ void TIM3_IRQHandler(void)
     if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
     {
         led_mode = BREATHE;
-        TIM_Cmd(TIM3, DISABLE); // 停止定时器以确保重置
+        TIM_Cmd(TIM3, DISABLE); /* 停止定时器以确保重置 */
         TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
     }
 }
 
+/*串口中断处理*/
 void USART1_IRQHandler(void)
 {
     // 检查是否是接收中断
     if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
     {
         char receivedChar = USART_ReceiveData(USART1); /*读取接收到的数据 */
+        rxBuffer[bufferIndex++] = receivedChar;        /*将接收到的数据存入缓冲区*/
 
-        // 将接收到的数据存入缓冲区
-        rxBuffer[bufferIndex++] = receivedChar;
-
-        // 如果接收到换行符，认为数据包结束
-        if (receivedChar == '\n')
+        if (receivedChar == '\n') /*如果接收到换行符，认为数据包结束*/
         {
-            rxBuffer[bufferIndex] = '\0'; // 添加字符串结束符
-            bufferIndex = 0;              // 重置缓冲区索引
+            rxBuffer[bufferIndex - 1] = '\0'; /* 把\n替换成\0结束符 */
+            bufferIndex = 0;                  /* 重置缓冲区索引 */
 
-            // 处理接收到的完整数据包（可调用回调函数）
-            // ProcessReceivedData(rxBuffer);
+            ProcessReceivedData(); /*处理接收到的完整数据包*/
         }
+    }
+}
+
+/*处理蓝牙通过串口发送过来的数据*/
+void ProcessReceivedData(void)
+{
+    char *pt_recv = rxBuffer;
+    if (strncmp(pt_recv, "switch", 6) == 0)
+    {
+        led_mode = BLINK;
+
+        TIM_Cmd(TIM3, DISABLE);  /*停止定时器以确保重置*/
+        TIM_SetCounter(TIM2, 0); /*重置计数器为0*/
+        TIM_Cmd(TIM3, ENABLE);   /*重新启动定时器，开始新的5秒计时*/
     }
 }
 
