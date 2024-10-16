@@ -24,8 +24,7 @@ PC 端使用USB转串口 (USB <=> TTL), PC端需要安装`USB转串口CH340驱�
 **CH340 3.3V** ↔ **HC-05 VCC (电源引脚)**  
    - 根据 HC-05 模块的要求，通常 VCC 电源为 3.3V 或 5V
 
-TODO 图
-
+![alt text](usbttl-bluetooth.jpg)
 
 ## AT指令
 蓝牙模块的 AT 指令用于配置蓝牙模块（例如 HC-05 或 HC-06）的工作模式、设备名称、波特率等参数。HC-05 和 HC-06 都支持 AT 指令，但 HC-05 支持更多的命令。
