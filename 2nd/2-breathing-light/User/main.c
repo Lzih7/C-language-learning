@@ -97,6 +97,8 @@ void Breathe_LED(void)
         // 如果 LED 关闭，停止 PWM 输出
         TIM_SetCompare1(TIM2, 0);
         TIM_SetCompare2(TIM2, 0);
+			  brightness = 0;
+			  breathing_direction = Positive;
     }
 }
 

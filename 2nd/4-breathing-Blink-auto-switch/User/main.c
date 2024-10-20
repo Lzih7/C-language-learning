@@ -15,7 +15,7 @@ const static uint8_t BREATHE = 1;  /*呼吸常量*/
 static uint8_t led_on = 1;              /*LED 开关状态*/
 static uint16_t brightness = 0;         /*LED 当前的亮度*/
 static uint8_t breathing_direction = 0; /*呼吸灯的方向*/
-static uint8_t led_mode = BREATHE;      /*LED当前的运行方式*/
+static uint8_t led_mode = BLINK;      /*LED当前的运行方式*/
 
 void LED_Blink(void);
 

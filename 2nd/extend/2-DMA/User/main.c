@@ -17,7 +17,7 @@ static uint16_t brightness = 0;         /*LED 当前的亮度*/
 static uint8_t breathing_direction = 0; /*呼吸灯的方向*/
 static uint8_t led_mode = BREATHE;      /*LED当前的运行方式*/
 static char rxBuffer[256] = {0};        /*receive buffer*/
-static int bufferIndex = 0;
+//static int bufferIndex = 0;
 
 void LED_Blink(void);
 void Resource_Init(void)
