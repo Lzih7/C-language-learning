@@ -13,10 +13,12 @@ PA0 PA1 接了2个LED灯。
 PA6 接入了反射式红外传感器的数据输入
 
 ## 关键步骤
-初始化 ADC1 , PA6 设置为GPIO_Mode_AIN, PA6 对应的是ADC_Channel_6，把ADC_Channel_6 设置为ADC1 的第一路.
+**初始化 ADC1**
+PA6 设置为GPIO_Mode_AIN, PA6 对应的是ADC_Channel_6，把ADC_Channel_6 设置为ADC1 的第一路.
 ADC1 的通道个数设为1, 所以 ADC1就只启用了ADC_Channel_6这一个通道。  
 
-初始化 DMA，DMA设置为从&ADC1->DR 这个ADC1的基地址拿数据，
+**初始化 DMA**
+DMA设置为从&ADC1->DR 这个ADC1的基地址拿数据，
 由于ADC1只有一个通道，所以DMA的BufferSize也设置为1，DMA从ADC1拿到数据后会存放到这个地址中 &AD_Value。
 目前只需要拿一个数据，所以只需要定义一个整形变量AD_Value来接收即可。如果是要接收多个变量，就需要要用整形数组来接收，同时增大BufferSize。
 
