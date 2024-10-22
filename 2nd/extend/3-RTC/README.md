@@ -29,14 +29,35 @@ RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE); /** 启用 PWR 时钟 **/
 RCC_APB1PeriphClockCmd(RCC_APB1Periph_BKP, ENABLE); /** 启用 BKP 时钟 **/
 
 PWR_BackupAccessCmd(ENABLE); /** 允许访问备份寄存器 **/
-RCC_LSEConfig(RCC_LSE_ON);   /** 启用外部 32.768kHz 晶振 LSE **/
-while (RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET)
-    ;                                   /** 等待 LSE 稳定 **/
-RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE); /** 选择 LSE 作为 RTC 时钟源 **/
-RCC_RTCCLKCmd(ENABLE);                  /** 启用 RTC 时钟 **/
-RTC_WaitForSynchro();                   /** 等待 RTC 同步 **/
-RTC_SetCounter(0);                      /** 初始化 RTC 计数器为 0 **/
-RTC_SetPrescaler(32767);                /** 设置预分频器，32.768kHz / 32768 = 1 Hz，即每秒递增一次 **/
+if (BKP_ReadBackupRegister(BKP_DR1) != 0xA5A5)
+{
+    RCC_LSICmd(ENABLE);
+    while (RCC_GetFlagStatus(RCC_FLAG_LSIRDY) != SET)
+        ;
+
+    RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
+    RCC_RTCCLKCmd(ENABLE);
+
+    RTC_WaitForSynchro();
+    RTC_WaitForLastTask();
+
+    RTC_SetPrescaler(40000 - 1);
+    RTC_WaitForLastTask();
+
+    BKP_WriteBackupRegister(BKP_DR1, 0xA5A5);
+}
+else
+{
+    RCC_LSICmd(ENABLE);
+    while (RCC_GetFlagStatus(RCC_FLAG_LSIRDY) != SET)
+        ;
+
+    RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
+    RCC_RTCCLKCmd(ENABLE);
+
+    RTC_WaitForSynchro();
+    RTC_WaitForLastTask();
+}
 /*RTC配置 END-----------------------------------------------------------------------------------------------*/
 ```
 

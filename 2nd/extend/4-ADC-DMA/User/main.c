@@ -83,9 +83,9 @@ void Resource_Init(void)
     ADC_StartCalibration(ADC1);
     while (ADC_GetCalibrationStatus(ADC1) == SET)
         ;
-
-    ADC_SoftwareStartConvCmd(ADC1, ENABLE); /*ADC触发*/
-                                            /*ADC DMA初始化 END ---------------------------------------------------------------------------------------------------*/
+    /*ADC触发*/
+    ADC_SoftwareStartConvCmd(ADC1, ENABLE);
+    /*ADC DMA初始化 END ---------------------------------------------------------------------------------------------------*/
 
     /*RTC配置 START---------------------------------------------------------------------------------------------*/
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE); /** 启用 PWR 时钟 **/
