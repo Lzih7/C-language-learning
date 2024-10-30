@@ -1,9 +1,16 @@
 
 **/.DS_Store
 **/*.liubin
+
+3-2-按键控制/Objects/
+3-2-按键控制/Listings/
+3-2-按键控制/DebugConfig/
 2nd/1-OLEShow/Objects/
 2nd/1-OLEShow/Listings/
 2nd/1-OLEShow/DebugConfig/
+2nd/1-1-OLEShow/Objects/
+2nd/1-1-OLEShow/Listings/
+2nd/1-1-OLEShow/DebugConfig/
 2nd/2-breathing-light/Objects/
 2nd/2-breathing-light/Listings/
 2nd/2-breathing-light/DebugConfig/
@@ -19,4 +26,10 @@
 2nd/extend/2-DMA/Objects/
 2nd/extend/2-DMA/Listings/
 2nd/extend/2-DMA/DebugConfig/
+2nd/extend/3-RTC/Objects/
+2nd/extend/3-RTC/Listings/
+2nd/extend/3-RTC/DebugConfig/
+2nd/extend/4-ADC-DMA/Objects/
+2nd/extend/4-ADC-DMA/Listings/
+2nd/extend/4-ADC-DMA/DebugConfig/
 
