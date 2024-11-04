@@ -159,7 +159,6 @@ void Resource_Init(void)
                   EXTI_Mode_Interrupt, EXTI_Trigger_Falling, ENABLE); /*EXTI_Line10 与 GPIO 的第 10 号引脚（PA10、PB10 等）相互对应*/
     UTIL_NVIC_CFG(EXTI15_10_IRQn, 0, 0, ENABLE);                      /*PreemptionPriority=0; SubPriority=0*/
 
-    UTIL_NVIC_CFG(TIM3_IRQn, 0, 0, ENABLE); /*使能 TIM3 中断通道*/
     /*中断配置 END-----------------------------------------------------------------------------------------------*/
 }
 
