@@ -1,5 +1,6 @@
 #include "stm32f10x.h"  // Device header
 #include "stm32_util.h" // My Utility
+#include "Delay.h"
 
 const static uint8_t Positive = 0; /*LED变亮常量*/
 const static uint8_t Negative = 1; /*LED变暗常量*/
@@ -9,7 +10,7 @@ const static uint8_t BREATHE = 1;  /*呼吸常量*/
 static uint8_t led_on = 1;              /*LED 开关状态*/
 static uint16_t brightness = 0;         /*LED 当前的亮度*/
 static uint8_t breathing_direction = 0; /*呼吸灯的方向*/
-static uint8_t led_mode = BLINK;      /*LED当前的运行方式*/
+static uint8_t led_mode = BLINK;        /*LED当前的运行方式*/
 
 void LED_Blink(void);
 
@@ -73,7 +74,7 @@ void Resource_Init(void)
                   EXTI_Mode_Interrupt, EXTI_Trigger_Falling, ENABLE); /*EXTI_Line10 与 GPIO 的第 10 号引脚（PA10、PB10 等）相互对应*/
     UTIL_NVIC_CFG(EXTI15_10_IRQn, 0, 0, ENABLE);                      /*PreemptionPriority=0; SubPriority=0*/
 
-    UTIL_NVIC_CFG(TIM3_IRQn, 0, 0, ENABLE); /*使能 TIM3 中断通道*/
+    // UTIL_NVIC_CFG(TIM3_IRQn, 0, 0, ENABLE); /*使能 TIM3 中断通道*/
     /*中断配置 END-----------------------------------------------------------------------------------------------*/
 }
 
@@ -91,10 +92,16 @@ void EXTI15_10_IRQHandler(void)
 {
     if (EXTI_GetITStatus(EXTI_Line10) != RESET)
     {
-        if (led_mode == BREATHE) /*切换模式*/
-            led_mode = BLINK;
-        else
-            led_mode = BREATHE;
+        Delay_ms(50); // 延时进行消抖
+
+        // 再次检测按钮状态，确认是否按下
+        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_10) == Bit_RESET)
+        {
+            if (led_mode == BREATHE) /*切换模式*/
+                led_mode = BLINK;
+            else
+                led_mode = BREATHE;
+        }
 
         EXTI_ClearITPendingBit(EXTI_Line10); /*清除中断标志*/
     }
