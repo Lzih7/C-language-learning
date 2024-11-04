@@ -1,12 +1,12 @@
 #include "stm32f10x.h"  // Device header
 #include "stm32_util.h" // My Utility
 
-static uint8_t Positive = 0; // LED变亮的方向
-static uint8_t Negative = 1; // LED变暗的方向
+static const uint8_t Positive = 0; // LED变亮的方向
+static const uint8_t Negative = 1; // LED变暗的方向
 
 static uint8_t led_on = 1; // LED 开关状态
 static uint16_t brightness = 0;
-static uint8_t breathing_direction = 0;
+static uint8_t breathing_direction = Positive;
 
 void Resource_Init(void)
 {
@@ -97,8 +97,8 @@ void Breathe_LED(void)
         // 如果 LED 关闭，停止 PWM 输出
         TIM_SetCompare1(TIM2, 0);
         TIM_SetCompare2(TIM2, 0);
-			  brightness = 0;
-			  breathing_direction = Positive;
+        brightness = 0;
+        breathing_direction = Positive;
     }
 }
 

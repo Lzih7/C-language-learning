@@ -49,6 +49,11 @@ void EXTI15_10_IRQHandler(void)
     }
 }
 ```
+
+## 流程图
+![流程图](flow.png)
+
+<BR><BR><BR>
 ---
 
 ## Q1:简要介绍⼀下 TIM 定时中断的⼯作流程

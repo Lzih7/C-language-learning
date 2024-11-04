@@ -17,7 +17,7 @@ static uint16_t brightness = 0;         /*LED 当前的亮度*/
 static uint8_t breathing_direction = 0; /*呼吸灯的方向*/
 static uint8_t led_mode = BREATHE;      /*LED当前的运行方式*/
 static char rxBuffer[256] = {0};        /*receive buffer*/
-//static int bufferIndex = 0;
+// static int bufferIndex = 0;
 
 void LED_Blink(void);
 void Resource_Init(void)
@@ -70,7 +70,13 @@ void Resource_Init(void)
     /*DMA START------------------------------------------------------------------------------------------------*/
     RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 
-    // 配置 DMA1 通道5（用于 USART1 RX）
+    /* 配置 DMA1 通道5（用于 USART1 RX）
+     * STM32 系列芯片中，不同的 UART 外设（如 USART1、USART2、USART3 等）和 DMA 通道的连接是固定的。
+     * STM32F1 系列中：
+     * USART1 的 RX 通道固定映射为 DMA1_Channel5。
+     * USART1 的 TX 通道固定映射为 DMA1_Channel4
+     */
+
     UTIL_DMA_CFG(DMA1_Channel5,               //
                  (uint32_t)&USART1->DR,       /*外设地址（USART1 数据寄存器）*/
                  (uint32_t)rxBuffer,          /*内存地址（缓冲区）*/
