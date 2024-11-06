@@ -127,7 +127,7 @@ void EXTI15_10_IRQHandler(void)
         led_mode = BLINK;
 
         TIM_Cmd(TIM3, DISABLE);  /*停止定时器以确保重置*/
-        TIM_SetCounter(TIM2, 0); /*重置计数器为0*/
+        TIM_SetCounter(TIM3, 0); /*重置计数器为0*/
         TIM_Cmd(TIM3, ENABLE);   /*重新启动定时器，开始新的5秒计时*/
 
         EXTI_ClearITPendingBit(EXTI_Line10); // 清除中断标志
