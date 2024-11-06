@@ -6,6 +6,7 @@
  */
 #include "stm32f10x.h"  // Device header
 #include "stm32_util.h" // My Utility
+#include "Delay.h"
 
 const static uint8_t Positive = 0; /*LED变亮常量*/
 const static uint8_t Negative = 1; /*LED变暗常量*/
@@ -110,13 +111,11 @@ void LED_Blink(void)
 {
     TIM_SetCompare1(TIM2, 999); // LED1 亮
     TIM_SetCompare2(TIM2, 999); // LED2 亮
-    Delay_us(200 * 1000);       // Delay_us函数最大支持233ms,这里需要delay 250ms,分2步做delay
-    Delay_us(50 * 1000);
+    Delay_ms(250);
 
     TIM_SetCompare1(TIM2, 0); // LED1 灭
     TIM_SetCompare2(TIM2, 0); // LED2 灭
-    Delay_us(200 * 1000);
-    Delay_us(50 * 1000);
+    Delay_ms(250);
 }
 
 void Breathe_LED(void)
