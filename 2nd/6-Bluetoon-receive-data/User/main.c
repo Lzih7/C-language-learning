@@ -7,6 +7,8 @@
 #include <string.h>
 #include "stm32f10x.h"  // Device header
 #include "stm32_util.h" // My Utility
+#include "OLED.h"
+#include "Delay.h"
 
 const static uint8_t Positive = 0; /*LED变亮常量*/
 const static uint8_t Negative = 1; /*LED变暗常量*/
@@ -148,9 +150,9 @@ void ProcessReceivedData(void)
     if (strncmp(pt_recv, "switch", 6) == 0)
     {
         led_mode = BLINK;
-
+        OLED_ShowString(1, 1, pt_recv);
         TIM_Cmd(TIM3, DISABLE);  /*停止定时器以确保重置*/
-        TIM_SetCounter(TIM2, 0); /*重置计数器为0*/
+        TIM_SetCounter(TIM3, 0); /*重置计数器为0*/
         TIM_Cmd(TIM3, ENABLE);   /*重新启动定时器，开始新的5秒计时*/
     }
 }
@@ -159,13 +161,11 @@ void LED_Blink(void)
 {
     TIM_SetCompare1(TIM2, 999); // LED1 亮
     TIM_SetCompare2(TIM2, 999); // LED2 亮
-    Delay_us(200 * 1000);       // Delay_us函数最大支持233ms,这里需要delay 250ms,分2步做delay
-    Delay_us(50 * 1000);
+    Delay_ms(250);
 
     TIM_SetCompare1(TIM2, 0); // LED1 灭
     TIM_SetCompare2(TIM2, 0); // LED2 灭
-    Delay_us(200 * 1000);
-    Delay_us(50 * 1000);
+    Delay_ms(250);
 }
 
 void Breathe_LED(void)
@@ -198,6 +198,7 @@ void Breathe_LED(void)
 
 int main(void)
 {
+    OLED_Init();
     Resource_Init();
 
     while (1)

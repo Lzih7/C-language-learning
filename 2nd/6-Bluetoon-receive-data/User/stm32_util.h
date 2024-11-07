@@ -2,7 +2,6 @@
 #define __STM32_UTIL_H
 #include "stm32f10x.h" // Device header
 
-void Delay_us(uint32_t xus);
 
 /**
  * 简化了对 GPIO 引脚的初始化操作。传入 GPIO 端口、引脚号、模式和速度参数，快速初始化对应的 GPIO 引脚，而不必手动设置每个参数
