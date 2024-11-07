@@ -103,13 +103,17 @@ void EXTI15_10_IRQHandler(void)
 {
     if (EXTI_GetITStatus(EXTI_Line10) != RESET)
     {
-        led_mode = BLINK;
+        Delay_ms(20); // 延迟20毫秒，用于消抖
+        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_10) == Bit_RESET)
+        {
+            led_mode = BLINK;
 
-        TIM_Cmd(TIM3, DISABLE);  /*停止定时器以确保重置*/
-        TIM_SetCounter(TIM3, 0); /*重置计数器为0*/
-        TIM_Cmd(TIM3, ENABLE);   /*重新启动定时器，开始新的5秒计时*/
+            TIM_Cmd(TIM3, DISABLE);  /*停止定时器以确保重置*/
+            TIM_SetCounter(TIM3, 0); /*重置计数器为0*/
+            TIM_Cmd(TIM3, ENABLE);   /*重新启动定时器，开始新的5秒计时*/
 
-        EXTI_ClearITPendingBit(EXTI_Line10); // 清除中断标志
+            EXTI_ClearITPendingBit(EXTI_Line10); // 清除中断标志
+        }
     }
 }
 

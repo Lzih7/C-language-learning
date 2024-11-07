@@ -16,7 +16,7 @@ const static uint8_t BREATHE = 1;  /*呼吸常量*/
 static uint8_t led_on = 1;              /*LED 开关状态*/
 static uint16_t brightness = 0;         /*LED 当前的亮度*/
 static uint8_t breathing_direction = 0; /*呼吸灯的方向*/
-static uint8_t led_mode = BLINK;      /*LED当前的运行方式*/
+static uint8_t led_mode = BLINK;        /*LED当前的运行方式*/
 
 void LED_Blink(void);
 
@@ -76,8 +76,13 @@ void EXTI0_IRQHandler(void)
 {
     if (EXTI_GetITStatus(EXTI_Line0) != RESET)
     {
-        led_on = !led_on;                   // 切换 LED 开关状态
-        EXTI_ClearITPendingBit(EXTI_Line0); // 清除中断标志
+        Delay_ms(20); // 延迟20毫秒，用于消抖
+        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0) == Bit_RESET)
+        {
+            led_on = !led_on; /* 切换 LED 开关状态*/
+        }
+
+        EXTI_ClearITPendingBit(EXTI_Line0); /* 清除中断标志*/
     }
 }
 
@@ -86,13 +91,17 @@ void EXTI15_10_IRQHandler(void)
 {
     if (EXTI_GetITStatus(EXTI_Line10) != RESET)
     {
-        led_mode = BLINK;
+        Delay_ms(20); // 延迟20毫秒，用于消抖
+        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_10) == Bit_RESET)
+        {
+            led_mode = BLINK;
 
-        TIM_Cmd(TIM3, DISABLE);  /*停止定时器以确保重置*/
-        TIM_SetCounter(TIM3, 0); /*重置计数器为0*/
-        TIM_Cmd(TIM3, ENABLE);   /*重新启动定时器，开始新的5秒计时*/
+            TIM_Cmd(TIM3, DISABLE);  /*停止定时器以确保重置*/
+            TIM_SetCounter(TIM3, 0); /*重置计数器为0*/
+            TIM_Cmd(TIM3, ENABLE);   /*重新启动定时器，开始新的5秒计时*/
 
-        EXTI_ClearITPendingBit(EXTI_Line10); // 清除中断标志
+            EXTI_ClearITPendingBit(EXTI_Line10); // 清除中断标志
+        }
     }
 }
 
