@@ -75,7 +75,12 @@ void EXTI0_IRQHandler(void)
 {
     if (EXTI_GetITStatus(EXTI_Line0) != RESET)
     {
-        led_on = !led_on;                   /* 切换 LED 开关状态*/
+        Delay_ms(20); // 延迟20毫秒，用于消抖
+        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0) == Bit_RESET)
+        {
+            led_on = !led_on; /* 切换 LED 开关状态*/
+        }
+
         EXTI_ClearITPendingBit(EXTI_Line0); /* 清除中断标志*/
     }
 }
@@ -85,9 +90,7 @@ void EXTI15_10_IRQHandler(void)
 {
     if (EXTI_GetITStatus(EXTI_Line10) != RESET)
     {
-        Delay_ms(50); // 延时进行消抖
-
-        // 再次检测按钮状态，确认是否按下
+        Delay_ms(20); // 延迟20毫秒，用于消抖
         if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_10) == Bit_RESET)
         {
             if (led_mode == BREATHE) /*切换模式*/
@@ -102,13 +105,21 @@ void EXTI15_10_IRQHandler(void)
 
 void LED_Blink(void)
 {
-    TIM_SetCompare1(TIM2, 999); // LED1 亮
-    TIM_SetCompare2(TIM2, 999); // LED2 亮
-    Delay_ms(250);
+    if (led_on)
+    {
+        TIM_SetCompare1(TIM2, 999); // LED1 亮
+        TIM_SetCompare2(TIM2, 999); // LED2 亮
+        Delay_ms(250);
 
-    TIM_SetCompare1(TIM2, 0); // LED1 灭
-    TIM_SetCompare2(TIM2, 0); // LED2 灭
-    Delay_ms(250);
+        TIM_SetCompare1(TIM2, 0); // LED1 灭
+        TIM_SetCompare2(TIM2, 0); // LED2 灭
+        Delay_ms(250);
+    }
+    else
+    {
+        TIM_SetCompare1(TIM2, 0); // LED1 灭
+        TIM_SetCompare2(TIM2, 0); // LED2 灭
+    }
 }
 
 void Breathe_LED(void)
