@@ -90,10 +90,8 @@ void Resource_Init(void)
                  DMA_Priority_High,           /*优先级高*/
                  DMA_M2M_Disable);            /*禁止内存到内存传输*/
 
-    DMA_Cmd(DMA1_Channel5, ENABLE);                  /*启用 DMA1 通道5*/
-    USART_DMACmd(USART1, USART_DMAReq_Rx, ENABLE);   /*启用 USART1 的 DMA 接收功能*/
-    DMA_ITConfig(DMA1_Channel5, DMA_IT_TC, ENABLE);  /*使能 DMA1 通道5 的传输完成中断*/
-    UTIL_NVIC_CFG(DMA1_Channel5_IRQn, 0, 0, ENABLE); /*配置 NVIC 以响应 DMA 中断*/
+    DMA_Cmd(DMA1_Channel5, ENABLE);                /*启用 DMA1 通道5*/
+    USART_DMACmd(USART1, USART_DMAReq_Rx, ENABLE); /*启用 USART1 的 DMA 接收功能*/
     /*DMA END-------------------------------------------------------------------------------------------------*/
 
     /*中断配置 START---------------------------------------------------------------------------------------------*/
@@ -128,7 +126,7 @@ void EXTI15_10_IRQHandler(void)
         led_mode = BLINK;
 
         TIM_Cmd(TIM3, DISABLE);  /*停止定时器以确保重置*/
-        TIM_SetCounter(TIM2, 0); /*重置计数器为0*/
+        TIM_SetCounter(TIM3, 0); /*重置计数器为0*/
         TIM_Cmd(TIM3, ENABLE);   /*重新启动定时器，开始新的5秒计时*/
 
         EXTI_ClearITPendingBit(EXTI_Line10); // 清除中断标志
@@ -143,26 +141,6 @@ void TIM3_IRQHandler(void)
         led_mode = BREATHE;
         TIM_Cmd(TIM3, DISABLE); /* 停止定时器以确保重置 */
         TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
-    }
-}
-
-/*DMA1 通道5 中断处理函数*/
-void DMA1_Channel5_IRQHandler(void)
-{
-    /*检查 DMA 的传输完成中断标志*/
-    if (DMA_GetITStatus(DMA1_IT_TC5))
-    {
-        uint8_t receivedByte = rxBuffer[0]; /*读取接收到的单字节数据*/
-        if (receivedByte == (uint8_t)'s')
-        {
-            led_mode = BLINK;
-
-            TIM_Cmd(TIM3, DISABLE);  /*停止定时器以确保重置*/
-            TIM_SetCounter(TIM2, 0); /*重置计数器为0*/
-            TIM_Cmd(TIM3, ENABLE);   /*重新启动定时器，开始新的5秒计时*/
-        }
-
-        DMA_ClearITPendingBit(DMA1_IT_TC5); /*清除 DMA 的传输完成中断标志*/
     }
 }
 
@@ -206,12 +184,28 @@ void Breathe_LED(void)
     }
 }
 
+void dma_check_bluetooth_data(void)
+{
+    uint8_t receivedByte = rxBuffer[0]; /*读取接收到的单字节数据*/
+    if (receivedByte == (uint8_t)'s')
+    {
+        led_mode = BLINK;
+
+        TIM_Cmd(TIM3, DISABLE);  /*停止定时器以确保重置*/
+        TIM_SetCounter(TIM3, 0); /*重置计数器为0*/
+        TIM_Cmd(TIM3, ENABLE);   /*重新启动定时器，开始新的5秒计时*/
+        rxBuffer[0] = 0;
+    }
+}
+
 int main(void)
 {
     Resource_Init(); /*初始化说有资源*/
 
     while (1)
     {
+        dma_check_bluetooth_data();
+
         if (led_mode == BREATHE)
         {
             Breathe_LED(); /*控制 LED 呼吸灯*/

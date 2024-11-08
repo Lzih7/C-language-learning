@@ -6,12 +6,12 @@
                 "z:\\github\\C-language-learning\\2nd\\3-breathing-Blink-light\\Start",
                 "z:\\github\\C-language-learning\\2nd\\3-breathing-Blink-light\\User",
                 "z:\\github\\C-language-learning\\2nd\\3-breathing-Blink-light\\Library",
+                "z:\\github\\C-language-learning\\2nd\\3-breathing-Blink-light\\System",
                 "C:\\Keil_v5\\ARM\\ARMCC\\include",
                 "C:\\Keil_v5\\ARM\\ARMCC\\include\\rw"
             ],
             "defines": [
                 "USE_STDPERIPH_DRIVER",
-                "STM32F10X_MD",
                 "__CC_ARM",
                 "__arm__",
                 "__align(x)=",

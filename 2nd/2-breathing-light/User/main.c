@@ -67,8 +67,13 @@ void EXTI0_IRQHandler(void)
 {
     if (EXTI_GetITStatus(EXTI_Line0) != RESET)
     {
-        led_on = !led_on;                   // 切换 LED 开关状态
-        EXTI_ClearITPendingBit(EXTI_Line0); // 清除中断标志
+        Delay_ms(20); // 延迟20毫秒，用于消抖
+        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0) == Bit_RESET)
+        {
+            led_on = !led_on; /* 切换 LED 开关状态*/
+        }
+
+        EXTI_ClearITPendingBit(EXTI_Line0); /* 清除中断标志*/
     }
 }
 

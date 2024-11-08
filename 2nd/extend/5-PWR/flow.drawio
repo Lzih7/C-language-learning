@@ -1,0 +1,110 @@
+<mxfile host="65bd71144e">
+    <diagram id="bshUWRw8r4V4z6tN9mnT" name="第 1 页">
+        <mxGraphModel dx="699" dy="635" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="4" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="2" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="427" y="210" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="2" value="&lt;div style=&quot;background-color: rgb(255, 255, 255); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; line-height: 19px;&quot;&gt;Resource_Init()&lt;/div&gt;" style="whiteSpace=wrap;html=1;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="352" y="110" width="150" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="56" value="Y" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="53" target="57" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="427" y="330" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="69" style="edgeStyle=none;html=1;" parent="1" source="53" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="427" y="210" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="111" style="edgeStyle=none;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="53" target="105">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="260" y="251"/>
+                            <mxPoint x="260" y="480"/>
+                            <mxPoint x="427" y="480"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="112" value="N" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="111">
+                    <mxGeometry x="-0.2627" y="-1" relative="1" as="geometry">
+                        <mxPoint y="1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="53" value="&lt;div style=&quot;background-color: rgb(255, 255, 255); font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px;&quot;&gt;&lt;div style=&quot;line-height: 18px;&quot;&gt;bluetooth_has_data&amp;nbsp;&lt;/div&gt;&lt;div style=&quot;line-height: 18px;&quot;&gt;== &lt;span style=&quot;color: #098658;&quot;&gt;1&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="287" y="212" width="280" height="78" as="geometry"/>
+                </mxCell>
+                <mxCell id="106" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="109" target="105">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="110" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="57" target="109">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="57" value="&lt;div style=&quot;font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; line-height: 19px;&quot;&gt;&lt;div style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 12px; line-height: 18px;&quot;&gt;&lt;span style=&quot;&quot;&gt;rxBuffer&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 12px; line-height: 18px;&quot;&gt;&quot;on&quot; - tuneon&lt;/div&gt;&lt;div style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 12px; line-height: 18px;&quot;&gt;&quot;off&quot; - tuenoff&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;shadow=1;labelBackgroundColor=#FFFFFF;" parent="1" vertex="1">
+                    <mxGeometry x="337" y="321" width="180" height="63" as="geometry"/>
+                </mxCell>
+                <mxCell id="70" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="105" target="53" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="390" y="390" as="sourcePoint"/>
+                        <mxPoint x="600" y="200" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="427" y="580"/>
+                            <mxPoint x="580" y="580"/>
+                            <mxPoint x="580" y="180"/>
+                            <mxPoint x="427" y="180"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="77" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="76" target="2" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="76" value="start" style="ellipse;shape=doubleEllipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="402" y="25" width="50" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="94" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="79" target="103" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="704" y="270" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="79" value="&lt;div style=&quot;font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; line-height: 19px;&quot;&gt;&lt;div style=&quot;line-height: 19px;&quot;&gt;&lt;div style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 12px; line-height: 18px;&quot;&gt;&lt;div style=&quot;line-height: 18px;&quot;&gt;USART1_IRQHandler&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;shadow=1;fillColor=#d5e8d4;strokeColor=#82b366;labelBackgroundColor=#D6E8D5;" parent="1" vertex="1">
+                    <mxGeometry x="629" y="181" width="150" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="80" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontColor=#fff2cc;endArrow=classic;endFill=1;fillColor=#d5e8d4;strokeColor=#82b366;labelBackgroundColor=#d6e8d5;" parent="1" source="81" target="79" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="81" value="&lt;div style=&quot;font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; line-height: 19px;&quot;&gt;&lt;div style=&quot;line-height: 19px;&quot;&gt;USART1触发中断&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;shadow=1;fillColor=#d5e8d4;strokeColor=#82b366;labelBackgroundColor=#d6e8d5;" parent="1" vertex="1">
+                    <mxGeometry x="629" y="110" width="150" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="92" value="&lt;div style=&quot;border-color: var(--border-color); text-align: left; font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px;&quot;&gt;&lt;span style=&quot;border-color: var(--border-color);&quot;&gt;PA0 为复用推挽输出,LED&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color); text-align: left; font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; line-height: 18px;&quot;&gt;&lt;div style=&quot;border-color: var(--border-color); line-height: 18px;&quot;&gt;&lt;span style=&quot;&quot;&gt;&lt;span style=&quot;border-color: var(--border-color);&quot;&gt;TIM2,&lt;/span&gt;&lt;span style=&quot;border-color: var(--border-color);&quot;&gt;预分频器71,&lt;/span&gt;&lt;span style=&quot;border-color: var(--border-color);&quot;&gt;Period=999&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;border-color: var(--border-color); line-height: 18px;&quot;&gt;&lt;div style=&quot;line-height: 18px;&quot;&gt;&lt;span style=&quot;&quot;&gt;USART1 配置为9600，&lt;/span&gt;&lt;span style=&quot;&quot;&gt;使能接收中断&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fontColor=#000000;darkOpacity=0.05;fillColor=#FFF9B2;strokeColor=none;fillStyle=solid;direction=west;gradientDirection=north;gradientColor=#FFF2A1;shadow=1;size=20;pointerEvents=1;labelBackgroundColor=#FEF7AE;" parent="1" vertex="1">
+                    <mxGeometry x="70" y="85" width="222.5" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="93" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="92" target="2" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="400" y="350" as="sourcePoint"/>
+                        <mxPoint x="450" y="300" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="108" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="103" target="107">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="103" value="&lt;div style=&quot;font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; line-height: 19px;&quot;&gt;&lt;div style=&quot;line-height: 19px;&quot;&gt;&lt;div style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 12px; line-height: 18px;&quot;&gt;&lt;div style=&quot;line-height: 18px;&quot;&gt;&lt;span style=&quot;&quot;&gt;Save to&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;line-height: 18px;&quot;&gt;&lt;span style=&quot;&quot;&gt;rxBuffer&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;shadow=1;fillColor=#d5e8d4;strokeColor=#82b366;labelBackgroundColor=#D6E8D5;" parent="1" vertex="1">
+                    <mxGeometry x="620" y="250" width="170" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="105" value="&lt;div style=&quot;background-color: rgb(255, 255, 255); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; line-height: 19px;&quot;&gt;&lt;div style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 12px; line-height: 18px;&quot;&gt;Sleep&lt;/div&gt;&lt;div style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 12px; line-height: 18px;&quot;&gt;&lt;div style=&quot;line-height: 18px;&quot;&gt;__WFI()&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;shadow=1;" vertex="1" parent="1">
+                    <mxGeometry x="337" y="510" width="180" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="107" value="&lt;div style=&quot;font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; line-height: 19px;&quot;&gt;&lt;div style=&quot;line-height: 19px;&quot;&gt;&lt;div style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 12px; line-height: 18px;&quot;&gt;&lt;div style=&quot;line-height: 18px;&quot;&gt;&lt;div style=&quot;line-height: 18px;&quot;&gt;bluetooth_has_data = &lt;span style=&quot;color: #098658;&quot;&gt;1&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;shadow=1;fillColor=#d5e8d4;strokeColor=#82b366;labelBackgroundColor=#D6E8D5;" vertex="1" parent="1">
+                    <mxGeometry x="619" y="322" width="170" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="109" value="&lt;div style=&quot;font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; line-height: 19px;&quot;&gt;&lt;div style=&quot;font-family: Menlo, Monaco, &amp;quot;Courier New&amp;quot;, monospace; font-size: 12px; line-height: 18px;&quot;&gt;&lt;span style=&quot;&quot;&gt;bluetooth_has_data =&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;border-color: var(--border-color); color: rgb(9, 134, 88);&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;shadow=1;labelBackgroundColor=#FFFFFF;" vertex="1" parent="1">
+                    <mxGeometry x="337" y="410" width="180" height="38" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
