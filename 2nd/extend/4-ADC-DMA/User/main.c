@@ -30,8 +30,7 @@ void Resource_Init(void)
     /*利用宏拼接的简洁写法*/
     UTIL_GPIO_CFG_EX(A, 0, 50MHz, AF_PP); /*PA0 为复用推挽输出，用于 PWM 输出,LED*/
     UTIL_GPIO_CFG_EX(A, 1, 50MHz, AF_PP); /*PA1 为复用推挽输出，用于 PWM 输出,LED*/
-    UTIL_GPIO_CFG_EX(A, 6, 50MHz, AIN);   /*PA3 为模拟输入*/
-    UTIL_GPIO_CFG_EX(B, 0, 50MHz, IPU);   /*PB0 为上拉输入，用于按键输入,BUTTON*/
+    UTIL_GPIO_CFG_EX(A, 6, 50MHz, AIN);   /*PA6 为模拟输入*/
     UTIL_GPIO_CFG_EX(B, 10, 50MHz, IPU);  /*PB10 为上拉输入，用于按键输入,BUTTON*/
     /*GPIO 配置 END------------------------------------------------------------------------------------------*/
 
@@ -87,66 +86,17 @@ void Resource_Init(void)
     ADC_SoftwareStartConvCmd(ADC1, ENABLE);
     /*ADC DMA初始化 END ---------------------------------------------------------------------------------------------------*/
 
-    /*RTC配置 START---------------------------------------------------------------------------------------------*/
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE); /** 启用 PWR 时钟 **/
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_BKP, ENABLE); /** 启用 BKP 时钟 **/
-
-    PWR_BackupAccessCmd(ENABLE); /** 允许访问备份寄存器 **/
-    if (BKP_ReadBackupRegister(BKP_DR1) != 0xA5A5)
-    {
-        RCC_LSICmd(ENABLE);
-        while (RCC_GetFlagStatus(RCC_FLAG_LSIRDY) != SET)
-            ;
-
-        RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
-        RCC_RTCCLKCmd(ENABLE);
-
-        RTC_WaitForSynchro();
-        RTC_WaitForLastTask();
-
-        RTC_SetPrescaler(40000 - 1);
-        RTC_WaitForLastTask();
-
-        // MyRTC_SetTime();
-
-        BKP_WriteBackupRegister(BKP_DR1, 0xA5A5);
-    }
-    else
-    {
-        RCC_LSICmd(ENABLE);
-        while (RCC_GetFlagStatus(RCC_FLAG_LSIRDY) != SET)
-            ;
-
-        RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
-        RCC_RTCCLKCmd(ENABLE);
-
-        RTC_WaitForSynchro();
-        RTC_WaitForLastTask();
-    }
-    /*RTC配置 END-----------------------------------------------------------------------------------------------*/
-
     /*中断配置 START---------------------------------------------------------------------------------------------*/
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE); /*使能 AFIO 时钟*/
 
-    GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, GPIO_PinSource0); /*选择 PB0 作为中断源*/
-    UTIL_EXTI_EX(0, Interrupt, Falling, ENABLE);                /*EXTI_Line0 <==> (PA0、PB0);Interrupt;下降沿触发*/
-    UTIL_NVIC_CFG(EXTI0_IRQn, 0, 0, ENABLE);                    /*配置中断优先级, 处理来自 GPIO 引脚 0（如 PA0、PB0）的中断事件*/
+    // GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, GPIO_PinSource0); /*选择 PB0 作为中断源*/
+    // UTIL_EXTI_EX(0, Interrupt, Falling, ENABLE);                /*EXTI_Line0 <==> (PA0、PB0);Interrupt;下降沿触发*/
+    // UTIL_NVIC_CFG(EXTI0_IRQn, 0, 0, ENABLE);                    /*配置中断优先级, 处理来自 GPIO 引脚 0（如 PA0、PB0）的中断事件*/
 
     GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, GPIO_PinSource10); /*选择 PB10 作为中断源*/
     UTIL_EXTI_EX(10, Interrupt, Falling, ENABLE);                /*EXTI_Line0 <==> (PA10、PB10);Interrupt;下降沿触发*/
     UTIL_NVIC_CFG(EXTI15_10_IRQn, 0, 0, ENABLE);                 /*PreemptionPriority=0; SubPriority=0*/
-
-    UTIL_NVIC_CFG(TIM3_IRQn, 0, 0, ENABLE); /*使能 TIM3 中断通道*/
     /*中断配置 END-----------------------------------------------------------------------------------------------*/
-}
-
-void EXTI0_IRQHandler(void)
-{
-    if (EXTI_GetITStatus(EXTI_Line0) != RESET)
-    {
-        led_on = !led_on;                   // 切换 LED 开关状态
-        EXTI_ClearITPendingBit(EXTI_Line0); // 清除中断标志
-    }
 }
 
 /**按键 2 切换模式*/
@@ -154,32 +104,34 @@ void EXTI15_10_IRQHandler(void)
 {
     if (EXTI_GetITStatus(EXTI_Line10) != RESET)
     {
-        if (led_mode == BREATHE)
+        Delay_ms(20); // 延迟20毫秒，用于消抖
+        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_10) == RESET)
         {
-            led_mode = BLINK;
-
-            TIM_Cmd(TIM3, DISABLE);  /*停止定时器以确保重置*/
-            TIM_SetCounter(TIM2, 0); /*重置计数器为0*/
-            TIM_Cmd(TIM3, ENABLE);   /*重新启动定时器，开始新的5秒计时*/
+            if (led_mode == BREATHE)
+            {
+                led_mode = BLINK;
+            }
+            else
+            {
+                led_mode = BREATHE;
+            }
         }
-        else
-        {
-            led_mode = BREATHE;
-        }
+        EXTI_ClearITPendingBit(EXTI_Line10); // 清除中断标志
     }
-
-    EXTI_ClearITPendingBit(EXTI_Line10); // 清除中断标志
 }
 
 void LED_Blink(void)
 {
-    TIM_SetCompare1(TIM2, 999); // LED1 亮
-    TIM_SetCompare2(TIM2, 999); // LED2 亮
-    Delay_ms(250);
+    if (led_on)
+    {
+        TIM_SetCompare1(TIM2, 999); // LED1 亮
+        TIM_SetCompare2(TIM2, 999); // LED2 亮
+        Delay_ms(250);
 
-    TIM_SetCompare1(TIM2, 0); // LED1 灭
-    TIM_SetCompare2(TIM2, 0); // LED2 灭
-    Delay_ms(250);
+        TIM_SetCompare1(TIM2, 0); // LED1 灭
+        TIM_SetCompare2(TIM2, 0); // LED2 灭
+        Delay_ms(250);
+    }
 }
 
 void Breathe_LED(void)
@@ -210,23 +162,22 @@ void Breathe_LED(void)
     }
 }
 
+static uint32_t count = 0;
+
 int main(void)
 {
     SystemInit();    /** 配置系统时钟 **/
     Resource_Init(); /** 配置系统用到的所有资源 **/
     OLED_Init();     /*OLED初始化*/
 
-    uint32_t startTime = RTC_GetCounter(); /** 记录开始时间 **/
-
     while (1)
     {
-        led_on = (AD_Value < 2000 ? 1 : 0);
-        uint32_t currentTime = RTC_GetCounter(); /** 获取当前时间 **/
-        if ((currentTime - startTime) >= 1)
-        {
-            startTime = currentTime;
-            OLED_ShowNum(1, 5, AD_Value, 4);
-        }
+        // 在main中不断的去检查ADC收集到的传感器的远近数据。
+        led_on = (AD_Value < 5000 ? 1 : 0);
+
+        // 下面这句代码会导致运行时时序的改变，OLED_ShowNum应该占用了比较多的时间，导致呼吸灯的反应变慢
+        // 在开发阶段可以把值打出来，交付时在去掉。
+        // OLED_ShowNum(1, 5, AD_Value, 4);
 
         if (led_mode == BREATHE)
         {

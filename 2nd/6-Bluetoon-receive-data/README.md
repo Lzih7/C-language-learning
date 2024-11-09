@@ -77,6 +77,12 @@ void ProcessReceivedData(void)
     }
 }
 ```
+
+## 流程图
+![流程图](flow.png)
+
+<BR><BR><BR>
+
 ---
 
 ## Q1:蓝⽛ 与单⽚机交流使⽤的是什么通信协议？简要介绍⼀下这个通信协议

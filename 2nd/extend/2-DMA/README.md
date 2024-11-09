@@ -56,6 +56,12 @@ void DMA1_Channel5_IRQHandler(void)
     }
 }
 ```
+
+## 流程图
+![流程图](flow.png)
+
+<BR><BR><BR>
+
 ---
 
 ## Q1:介绍⼀下 DMA 的⼯作流程以及⼯作原理  

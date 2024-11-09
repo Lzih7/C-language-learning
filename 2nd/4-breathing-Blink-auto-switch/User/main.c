@@ -6,6 +6,7 @@
  */
 #include "stm32f10x.h"  // Device header
 #include "stm32_util.h" // My Utility
+#include "Delay.h"
 
 const static uint8_t Positive = 0; /*LED变亮常量*/
 const static uint8_t Negative = 1; /*LED变暗常量*/
@@ -15,7 +16,7 @@ const static uint8_t BREATHE = 1;  /*呼吸常量*/
 static uint8_t led_on = 1;              /*LED 开关状态*/
 static uint16_t brightness = 0;         /*LED 当前的亮度*/
 static uint8_t breathing_direction = 0; /*呼吸灯的方向*/
-static uint8_t led_mode = BLINK;      /*LED当前的运行方式*/
+static uint8_t led_mode = BLINK;        /*LED当前的运行方式*/
 
 void LED_Blink(void);
 
@@ -75,8 +76,13 @@ void EXTI0_IRQHandler(void)
 {
     if (EXTI_GetITStatus(EXTI_Line0) != RESET)
     {
-        led_on = !led_on;                   // 切换 LED 开关状态
-        EXTI_ClearITPendingBit(EXTI_Line0); // 清除中断标志
+        Delay_ms(20); // 延迟20毫秒，用于消抖
+        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_0) == Bit_RESET)
+        {
+            led_on = !led_on; /* 切换 LED 开关状态*/
+        }
+
+        EXTI_ClearITPendingBit(EXTI_Line0); /* 清除中断标志*/
     }
 }
 
@@ -85,13 +91,17 @@ void EXTI15_10_IRQHandler(void)
 {
     if (EXTI_GetITStatus(EXTI_Line10) != RESET)
     {
-        led_mode = BLINK;
+        Delay_ms(20); // 延迟20毫秒，用于消抖
+        if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_10) == Bit_RESET)
+        {
+            led_mode = BLINK;
 
-        TIM_Cmd(TIM3, DISABLE);  /*停止定时器以确保重置*/
-        TIM_SetCounter(TIM2, 0); /*重置计数器为0*/
-        TIM_Cmd(TIM3, ENABLE);   /*重新启动定时器，开始新的5秒计时*/
+            TIM_Cmd(TIM3, DISABLE);  /*停止定时器以确保重置*/
+            TIM_SetCounter(TIM3, 0); /*重置计数器为0*/
+            TIM_Cmd(TIM3, ENABLE);   /*重新启动定时器，开始新的5秒计时*/
 
-        EXTI_ClearITPendingBit(EXTI_Line10); // 清除中断标志
+            EXTI_ClearITPendingBit(EXTI_Line10); // 清除中断标志
+        }
     }
 }
 
@@ -110,13 +120,11 @@ void LED_Blink(void)
 {
     TIM_SetCompare1(TIM2, 999); // LED1 亮
     TIM_SetCompare2(TIM2, 999); // LED2 亮
-    Delay_us(200 * 1000);       // Delay_us函数最大支持233ms,这里需要delay 250ms,分2步做delay
-    Delay_us(50 * 1000);
+    Delay_ms(250);
 
     TIM_SetCompare1(TIM2, 0); // LED1 灭
     TIM_SetCompare2(TIM2, 0); // LED2 灭
-    Delay_us(200 * 1000);
-    Delay_us(50 * 1000);
+    Delay_ms(250);
 }
 
 void Breathe_LED(void)
