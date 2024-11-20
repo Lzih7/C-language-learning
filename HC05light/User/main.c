@@ -39,8 +39,6 @@ void prepare(void){
 	NVIC_CFG(TIM3_IRQn,0,0,ENABLE);
 	//配置TIM3中断
 	
-	GPIO_CFG(GPIOA,GPIO_Pin_9,GPIO_Speed_50MHz,GPIO_Mode_AF_PP);
-	GPIO_CFG(GPIOA,GPIO_Pin_10,GPIO_Speed_50MHz,GPIO_Mode_AF_PP);
 	USART1_CFG();
 }
 
@@ -70,10 +68,10 @@ void TIM3_IRQHandler(void){
 	}
 } //TIM3中断函数
 
-void USART_IRQHandler(void){
+void USART1_IRQHandler(void){
 	if(USART_GetITStatus(USART1,USART_IT_RXNE)==SET){
 		char receive=USART_ReceiveData(USART1);
-		if(receive==1){
+		if(receive=='1'){
 			OLED_ShowChar(1,1,1);
 			mode=blink;
 			TIM_Cmd(TIM3,ENABLE);		
