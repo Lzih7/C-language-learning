@@ -66,9 +66,61 @@ void LED_BLINK(void){
   ```
   * NVIC用于配置优先级
   * _Channel为EXTI通道
-    + 0~9：EXTIx_IRQn
-    + 10~15：EXTI15_10_IRQn 
-  
+    + 0~4：EXTIx_IRQn
+    + 5~9：EXTI9_5_IRQn
+    + 10~15：EXTI15_10_IRQn
+4. 外部中断函数
+```
+void EXTI15_10_IRQHandler(void){
+	if(EXTI_GetITStatus(EXTI_Line10)==SET){
+		if(mode==blink) mode=breath;
+		else if(mode==breath) mode=blink;
+		EXTI_ClearITPendingBit(EXTI_Line10);
+	}
+}
+```
++ 固定函数名
++ 函数介绍
+  1. EXTI_GetITStatus(EXTI_Line10)：
+ 
+     + 返回值：ITStatus  //SET或RESET
+     	* ITStatus的定义：
+     ```
+       typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;
+  2. EXTI_ClearITPendingBit(EXTI_Line10);
+     + 清除中断标志
+
+进入中断函数执行中断程序后**模式切换**
+### 开关灯
+Pin0引脚按钮用于开关控制
+1. EXTI中断
+2. 标志：led_on,每进入中断函数变为！led_on
+3. 改变呼吸灯函数，实现led_on控制
+   ```
+   void BREATHING_LIGHT(void){
+	if(led_on){
+		if(direction){
+			brightness++;
+			if(brightness>=1000){
+				direction=0;
+			}
+		}
+		
+		if(direction==0){
+			if(brightness==0){
+				direction=1;
+			}
+			brightness--;
+		}
+		TIM_SetCompare1(TIM2,brightness);
+		TIM_SetCompare2(TIM2,brightness);
+	}
+	else{
+		TIM_SetCompare1(TIM2,0);
+		TIM_SetCompare2(TIM2,0);
+	}
+   }
+   ```
 
 
 
