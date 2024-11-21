@@ -37,7 +37,7 @@
 	TIM_Cmd(TIM2,ENABLE);
    	//使能TIM2
     }
-```
+2. 呼吸灯函数
 
    
 
