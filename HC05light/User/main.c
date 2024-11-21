@@ -72,11 +72,14 @@ void USART1_IRQHandler(void){
 	if(USART_GetITStatus(USART1,USART_IT_RXNE)==SET){
 		char receive=USART_ReceiveData(USART1);
 		if(receive=='1'){
-			OLED_ShowChar(1,1,1);
+			OLED_Clear();
+			OLED_ShowChar(1,1,'1');
 			mode=blink;
+			TIM_SetCounter(TIM3,0);
 			TIM_Cmd(TIM3,ENABLE);		
 		}
 		else{
+			OLED_Clear();
 			OLED_ShowChar(1,1,receive);
 		}
 	}

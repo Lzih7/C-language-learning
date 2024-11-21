@@ -106,7 +106,9 @@ Section Cross References
     main.o(i.TIM3_IRQHandler) refers to main.o(.data) for mode
     main.o(i.USART1_IRQHandler) refers to stm32f10x_usart.o(i.USART_GetITStatus) for USART_GetITStatus
     main.o(i.USART1_IRQHandler) refers to stm32f10x_usart.o(i.USART_ReceiveData) for USART_ReceiveData
+    main.o(i.USART1_IRQHandler) refers to oled.o(i.OLED_Clear) for OLED_Clear
     main.o(i.USART1_IRQHandler) refers to oled.o(i.OLED_ShowChar) for OLED_ShowChar
+    main.o(i.USART1_IRQHandler) refers to stm32f10x_tim.o(i.TIM_SetCounter) for TIM_SetCounter
     main.o(i.USART1_IRQHandler) refers to stm32f10x_tim.o(i.TIM_Cmd) for TIM_Cmd
     main.o(i.USART1_IRQHandler) refers to main.o(.data) for mode
     main.o(i.main) refers to main.o(i.prepare) for prepare
@@ -947,15 +949,15 @@ Image Symbol Table
     i.TIM_TimeBaseInit                       0x08000d2c   Section        0  stm32f10x_tim.o(i.TIM_TimeBaseInit)
     i.USART1_CFG                             0x08000dd0   Section        0  usart.o(i.USART1_CFG)
     i.USART1_IRQHandler                      0x08000e80   Section        0  main.o(i.USART1_IRQHandler)
-    i.USART_Cmd                              0x08000ed0   Section        0  stm32f10x_usart.o(i.USART_Cmd)
-    i.USART_GetITStatus                      0x08000ee8   Section        0  stm32f10x_usart.o(i.USART_GetITStatus)
-    i.USART_ITConfig                         0x08000f3c   Section        0  stm32f10x_usart.o(i.USART_ITConfig)
-    i.USART_Init                             0x08000f88   Section        0  stm32f10x_usart.o(i.USART_Init)
-    i.USART_ReceiveData                      0x08001060   Section        0  stm32f10x_usart.o(i.USART_ReceiveData)
-    i.UsageFault_Handler                     0x0800106a   Section        0  stm32f10x_it.o(i.UsageFault_Handler)
-    i.main                                   0x08001070   Section        0  main.o(i.main)
-    i.prepare                                0x080010a0   Section        0  main.o(i.prepare)
-    .constdata                               0x08001254   Section     1520  oled.o(.constdata)
+    i.USART_Cmd                              0x08000ee0   Section        0  stm32f10x_usart.o(i.USART_Cmd)
+    i.USART_GetITStatus                      0x08000ef8   Section        0  stm32f10x_usart.o(i.USART_GetITStatus)
+    i.USART_ITConfig                         0x08000f4c   Section        0  stm32f10x_usart.o(i.USART_ITConfig)
+    i.USART_Init                             0x08000f98   Section        0  stm32f10x_usart.o(i.USART_Init)
+    i.USART_ReceiveData                      0x08001070   Section        0  stm32f10x_usart.o(i.USART_ReceiveData)
+    i.UsageFault_Handler                     0x0800107a   Section        0  stm32f10x_it.o(i.UsageFault_Handler)
+    i.main                                   0x08001080   Section        0  main.o(i.main)
+    i.prepare                                0x080010b0   Section        0  main.o(i.prepare)
+    .constdata                               0x08001264   Section     1520  oled.o(.constdata)
     .data                                    0x20000000   Section       20  stm32f10x_rcc.o(.data)
     APBAHBPrescTable                         0x20000000   Data          16  stm32f10x_rcc.o(.data)
     ADCPrescTable                            0x20000010   Data           4  stm32f10x_rcc.o(.data)
@@ -1157,18 +1159,18 @@ Image Symbol Table
     TIM_SetCounter                           0x08000d29   Thumb Code     4  stm32f10x_tim.o(i.TIM_SetCounter)
     TIM_TimeBaseInit                         0x08000d2d   Thumb Code   122  stm32f10x_tim.o(i.TIM_TimeBaseInit)
     USART1_CFG                               0x08000dd1   Thumb Code   168  usart.o(i.USART1_CFG)
-    USART1_IRQHandler                        0x08000e81   Thumb Code    68  main.o(i.USART1_IRQHandler)
-    USART_Cmd                                0x08000ed1   Thumb Code    24  stm32f10x_usart.o(i.USART_Cmd)
-    USART_GetITStatus                        0x08000ee9   Thumb Code    84  stm32f10x_usart.o(i.USART_GetITStatus)
-    USART_ITConfig                           0x08000f3d   Thumb Code    74  stm32f10x_usart.o(i.USART_ITConfig)
-    USART_Init                               0x08000f89   Thumb Code   210  stm32f10x_usart.o(i.USART_Init)
-    USART_ReceiveData                        0x08001061   Thumb Code    10  stm32f10x_usart.o(i.USART_ReceiveData)
-    UsageFault_Handler                       0x0800106b   Thumb Code     4  stm32f10x_it.o(i.UsageFault_Handler)
-    main                                     0x08001071   Thumb Code    42  main.o(i.main)
-    prepare                                  0x080010a1   Thumb Code   424  main.o(i.prepare)
-    OLED_F8x16                               0x08001254   Data        1520  oled.o(.constdata)
-    Region$$Table$$Base                      0x08001844   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08001864   Number         0  anon$$obj.o(Region$$Table)
+    USART1_IRQHandler                        0x08000e81   Thumb Code    84  main.o(i.USART1_IRQHandler)
+    USART_Cmd                                0x08000ee1   Thumb Code    24  stm32f10x_usart.o(i.USART_Cmd)
+    USART_GetITStatus                        0x08000ef9   Thumb Code    84  stm32f10x_usart.o(i.USART_GetITStatus)
+    USART_ITConfig                           0x08000f4d   Thumb Code    74  stm32f10x_usart.o(i.USART_ITConfig)
+    USART_Init                               0x08000f99   Thumb Code   210  stm32f10x_usart.o(i.USART_Init)
+    USART_ReceiveData                        0x08001071   Thumb Code    10  stm32f10x_usart.o(i.USART_ReceiveData)
+    UsageFault_Handler                       0x0800107b   Thumb Code     4  stm32f10x_it.o(i.UsageFault_Handler)
+    main                                     0x08001081   Thumb Code    42  main.o(i.main)
+    prepare                                  0x080010b1   Thumb Code   424  main.o(i.prepare)
+    OLED_F8x16                               0x08001264   Data        1520  oled.o(.constdata)
+    Region$$Table$$Base                      0x08001854   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08001874   Number         0  anon$$obj.o(Region$$Table)
     __libspace_start                         0x20000024   Data          96  libspace.o(.bss)
     __temporary_stack_top$libspace           0x20000084   Data           0  libspace.o(.bss)
 
@@ -1180,9 +1182,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000ed
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001888, Max: 0x00010000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001898, Max: 0x00010000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001864, Max: 0x00010000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001874, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1298,29 +1300,29 @@ Memory Map of the image
     0x08000d28   0x08000d28   0x00000004   Code   RO          481    i.TIM_SetCounter    stm32f10x_tim.o
     0x08000d2c   0x08000d2c   0x000000a4   Code   RO          487    i.TIM_TimeBaseInit  stm32f10x_tim.o
     0x08000dd0   0x08000dd0   0x000000b0   Code   RO         3493    i.USART1_CFG        usart.o
-    0x08000e80   0x08000e80   0x00000050   Code   RO         3200    i.USART1_IRQHandler  main.o
-    0x08000ed0   0x08000ed0   0x00000018   Code   RO          221    i.USART_Cmd         stm32f10x_usart.o
-    0x08000ee8   0x08000ee8   0x00000054   Code   RO          225    i.USART_GetITStatus  stm32f10x_usart.o
-    0x08000f3c   0x08000f3c   0x0000004a   Code   RO          227    i.USART_ITConfig    stm32f10x_usart.o
-    0x08000f86   0x08000f86   0x00000002   PAD
-    0x08000f88   0x08000f88   0x000000d8   Code   RO          228    i.USART_Init        stm32f10x_usart.o
-    0x08001060   0x08001060   0x0000000a   Code   RO          235    i.USART_ReceiveData  stm32f10x_usart.o
-    0x0800106a   0x0800106a   0x00000004   Code   RO         3269    i.UsageFault_Handler  stm32f10x_it.o
-    0x0800106e   0x0800106e   0x00000002   PAD
-    0x08001070   0x08001070   0x00000030   Code   RO         3201    i.main              main.o
-    0x080010a0   0x080010a0   0x000001b4   Code   RO         3202    i.prepare           main.o
-    0x08001254   0x08001254   0x000005f0   Data   RO         3401    .constdata          oled.o
-    0x08001844   0x08001844   0x00000020   Data   RO         3691    Region$$Table       anon$$obj.o
+    0x08000e80   0x08000e80   0x00000060   Code   RO         3200    i.USART1_IRQHandler  main.o
+    0x08000ee0   0x08000ee0   0x00000018   Code   RO          221    i.USART_Cmd         stm32f10x_usart.o
+    0x08000ef8   0x08000ef8   0x00000054   Code   RO          225    i.USART_GetITStatus  stm32f10x_usart.o
+    0x08000f4c   0x08000f4c   0x0000004a   Code   RO          227    i.USART_ITConfig    stm32f10x_usart.o
+    0x08000f96   0x08000f96   0x00000002   PAD
+    0x08000f98   0x08000f98   0x000000d8   Code   RO          228    i.USART_Init        stm32f10x_usart.o
+    0x08001070   0x08001070   0x0000000a   Code   RO          235    i.USART_ReceiveData  stm32f10x_usart.o
+    0x0800107a   0x0800107a   0x00000004   Code   RO         3269    i.UsageFault_Handler  stm32f10x_it.o
+    0x0800107e   0x0800107e   0x00000002   PAD
+    0x08001080   0x08001080   0x00000030   Code   RO         3201    i.main              main.o
+    0x080010b0   0x080010b0   0x000001b4   Code   RO         3202    i.prepare           main.o
+    0x08001264   0x08001264   0x000005f0   Data   RO         3401    .constdata          oled.o
+    0x08001854   0x08001854   0x00000020   Data   RO         3691    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08001864, Size: 0x00000688, Max: 0x00005000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08001874, Size: 0x00000688, Max: 0x00005000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08001864   0x00000014   Data   RW         1412    .data               stm32f10x_rcc.o
-    0x20000014   0x08001878   0x00000010   Data   RW         3203    .data               main.o
+    0x20000000   0x08001874   0x00000014   Data   RW         1412    .data               stm32f10x_rcc.o
+    0x20000014   0x08001888   0x00000010   Data   RW         3203    .data               main.o
     0x20000024        -       0x00000060   Zero   RW         3565    .bss                c_w.l(libspace.o)
-    0x20000084   0x08001888   0x00000004   PAD
+    0x20000084   0x08001898   0x00000004   PAD
     0x20000088        -       0x00000200   Zero   RW            2    HEAP                startup_stm32f10x_md.o
     0x20000288        -       0x00000400   Zero   RW            1    STACK               startup_stm32f10x_md.o
 
@@ -1334,7 +1336,7 @@ Image component sizes
 
          0          0          0          0          0       4508   core_cm3.o
         66          0          0          0          0        890   delay.o
-       876         60          0         16          0       3932   main.o
+       892         60          0         16          0       3944   main.o
        112         12          0          0          0       2528   misc.o
        686         22       1520          0          0       5481   oled.o
         64         26        236          0       1536        804   startup_stm32f10x_md.o
@@ -1349,7 +1351,7 @@ Image component sizes
        176          8          0          0          0        677   usart.o
 
     ----------------------------------------------------------------------
-      4176        288       1788         36       1536     338476   Object Totals
+      4192        288       1788         36       1536     338488   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         14          0          0          0          0          0   (incl. Padding)
 
@@ -1398,15 +1400,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      4456        304       1788         36       1636     336092   Grand Totals
-      4456        304       1788         36       1636     336092   ELF Image Totals
-      4456        304       1788         36          0          0   ROM Totals
+      4472        304       1788         36       1636     336104   Grand Totals
+      4472        304       1788         36       1636     336104   ELF Image Totals
+      4472        304       1788         36          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 6244 (   6.10kB)
+    Total RO  Size (Code + RO Data)                 6260 (   6.11kB)
     Total RW  Size (RW Data + ZI Data)              1672 (   1.63kB)
-    Total ROM Size (Code + RO Data + RW Data)       6280 (   6.13kB)
+    Total ROM Size (Code + RO Data + RW Data)       6296 (   6.15kB)
 
 ==============================================================================
 
