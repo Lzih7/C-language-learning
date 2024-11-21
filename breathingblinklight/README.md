@@ -21,12 +21,13 @@ void LED_BLINK(void){
    ```
    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE);
    //打开AFIO时钟
-**启用 APB2 总线上 AFIO 外设的时钟**
+   ```
+	**启用 APB2 总线上 AFIO 外设的时钟**
 
 2. 选择中断源
-  ```
-  GPIO_EXTILineConfig(GPIO_PortSourceGPIOB,GPIO_PinSource10); //PB10为中断源
-  ```
+   ```
+   GPIO_EXTILineConfig(GPIO_PortSourceGPIOB,GPIO_PinSource10); //PB10为中断源
+   ```
 3. 外部中断
 
    **宏定义EXTI初始化函数**
