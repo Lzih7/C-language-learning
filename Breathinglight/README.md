@@ -38,6 +38,14 @@
    	//使能TIM2
     }
 2. 呼吸灯函数
+   * 设置比较值：即TIM_Pulse
+     ```
+     TIM_SetCompare1(TIM_TypeDef* TIMx, uint16_t Compare1);
+   通道：1 =>Pin_0;
+   	2 =>Pin_1;
+   	3 =>Pin_2;
+   	4 =>Pin_3
+   * 预重装值：即TIM_period
 
    
 
