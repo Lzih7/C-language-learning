@@ -7,7 +7,7 @@
 1. 通过TIMx外设实现
    ```
    void TIM_PWM_Init(uint16_t arr,uint16_t psc)
-{
+   {
 	GPIO_InitTypeDef GPIO_InitStructure;
 	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 	TIM_OCInitTypeDef  TIM_OCInitStructure;
@@ -34,7 +34,7 @@
     TIM_OC1Init(TIM2, &TIM_OCInitStructure);
 	
 	TIM_Cmd(TIM2,ENABLE);
-}
+    }
 ```
    
 
