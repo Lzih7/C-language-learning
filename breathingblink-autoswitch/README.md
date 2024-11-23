@@ -17,8 +17,20 @@ RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3,ENABLE);
 }
 ```
 #### 关于arr,psc的相关计算
+计数频率：72MHz/psc   psc起分频作用
 
-
+arr/(72MHz/psc) 为秒数
+### 2.TIM3的中断函数
+基本步骤：按下按键->breath变为blink->使能TIM3，开始计时->计时完成触发中断->blink变为breath
+```
+void TIM3_IRQHandler(void){
+	if(TIM_GetITStatus(TIM3,TIM_IT_Update)==SET){
+		mode=breath;
+		TIM_Cmd(TIM3,DISABLE);
+		TIM_ClearITPendingBit(TIM3,TIM_IT_Update);
+	}
+}
+```
 
 
 
