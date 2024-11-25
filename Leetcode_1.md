@@ -152,7 +152,8 @@ double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Si
 5. 具体写法：
    + 指针or坐标(数组)定位 =>**坐标优先**   坐标是个int类型的数，使用方便广泛
    + 条件可并在循环中
-```char* longestPalindrome(char* s) {
+```
+char* longestPalindrome(char* s) {
     int len=strlen(s);
     int max=0;
     int p=0;
