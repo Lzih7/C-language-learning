@@ -296,3 +296,4 @@ char* longestCommonPrefix(char** strs, int strsSize) {
 }
 ```
 + step是否++，取决于循环是否进入
++ /////行不进入和进入一次step的值均为0
