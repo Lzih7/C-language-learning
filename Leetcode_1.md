@@ -270,3 +270,29 @@ int maxArea(int* height, int heightSize) {
     return max;
 }
 ```
+# 关于是否进入循环的判定
+最长公共前缀
+---
+```
+char* longestCommonPrefix(char** strs, int strsSize) {
+    char* s=(char*)malloc(sizeof(char)*500);
+    int step=0;
+    
+    for(int i=0;i<strsSize;i++){
+        int isprime=0;
+        int step=0;
+        if(i==0){
+            strcpy(s,strs[i]);
+        }else{
+            for(int j=0;s[j]==strs[i][j]&&j<strlen(s);j++){        //////////
+                step=j;
+                isprime=1;
+            }
+            s[(isprime==1)?(++step):step]='\0';
+        }
+    }
+
+    return s;
+}
+```
++ step是否++，取决于循环是否进入
