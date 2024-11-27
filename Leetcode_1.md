@@ -183,3 +183,89 @@ char* longestPalindrome(char* s) {
     return p+s;
 }
 ```
+# 字符、数的对应关系表示
+## 2个数组
+```
+int arr[13]={1000,900,500,400,100,90,50,40,10,9,5,4,1};
+char *s[13]={"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+char* intToRoman(int num) {
+    char* s1=(char*)malloc(sizeof(char)*16);
+    s1[0]='\0';  //不可忽视！
+    for(int i=0;i<13;i++){
+        while(num>=arr[i]){
+            num-=arr[i];
+            strcpy(s1+strlen(s1),s[i]);
+        }
+        if(num==0){
+            break;
+        }
+    }
+    return s1;
+}
+```
+**转罗马数字**
++ int数组元素坐标与char数组坐标对应
++ 无需使用*查找功能*
+## 一个数组
+```
+/*int arr[7]={1,2,10,50,100,500,1000};
+char romma[7]={'I','V','X','L','C','D','M'};
+合二为一，利于利用内在联系*/
+int romanToInt(char* s) {
+    int symbolValues[26];
+    symbolValues['I' - 'A'] = 1;
+    symbolValues['V' - 'A'] = 5;
+    symbolValues['X' - 'A'] = 10;
+    symbolValues['L' - 'A'] = 50;
+    symbolValues['C' - 'A'] = 100;
+    symbolValues['D' - 'A'] = 500;
+    symbolValues['M' - 'A'] = 1000;
+    int len=strlen(s);
+    int sum=0;
+    for(int i=0;i<len;i++){
+       
+        if(i<len-1){
+            if(symbolValues[s[i]-'A']<symbolValues[s[i+1]-'A']){
+                sum-=symbolValues[s[i]-'A'];
+            }else{
+                sum+=symbolValues[s[i]-'A'];
+            }
+        }
+        else sum+=symbolValues[s[i]-'A'];
+    }
+
+    return sum;
+
+}
+```
+**罗马数字转数字**
++ 需要*查找功能*  =>用一个数组表示对应关系
+# 双指针 
+水桶问题
+---
+```
+/*O(n)的优化算法*/
+/*双指针*/
+int maxArea(int* height, int heightSize) {
+    int max = 0;
+    int left = 0;
+    int right = heightSize - 1;
+    
+    while (left < right) {
+        // 计算当前面积
+        int current = (height[left] < height[right] ? height[left] : height[right]) * (right - left);
+        // 更新最大面积
+        if (current > max) {
+            max = current;
+        }
+        // 移动指针
+        if (height[left] < height[right]) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+    
+    return max;
+}
+```
