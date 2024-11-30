@@ -297,3 +297,20 @@ char* longestCommonPrefix(char** strs, int strsSize) {
 ```
 + step是否++，取决于循环是否进入
 + /////行不进入和进入一次step的值均为0
+# 巧妙回溯
+```
+void backtrack(char* digits,int index,char* combination,char** ret){
+    
+    if(index==strlen(digits)){
+        ret[cnt] = (char *)malloc((strlen(combination) + 1) * sizeof(char));
+        strcpy(ret[cnt++],combination);
+        return;
+    }
+    const char* letter=s[digits[index]-'0'];
+    for(int i=0;i<strlen(letter);i++){
+        combination[index]=letter[i];
+
+        backtrack(digits,index+1,combination,ret);
+    }
+}
+```
