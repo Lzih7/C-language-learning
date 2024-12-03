@@ -1,6 +1,6 @@
 #include "stm32f10x.h" 
 void DELAY(void){
-	for(int i=0;i<20000;i++){
+	for(int i=0;i<80000;i++){
 	
 	}
 }
