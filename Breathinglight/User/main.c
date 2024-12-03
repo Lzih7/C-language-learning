@@ -2,7 +2,7 @@
 #include "Key.h"
 #include "Delay.h"
 
-
+static int led_on=1;
 void TIM_PWM_Init(uint16_t arr,uint16_t psc)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
@@ -42,29 +42,26 @@ void Breathing_Light(void)
 	
 	uint16_t brightness=0;
 	uint8_t direction=1;
-	while(1){
-		uint8_t num=Key_GetNum();
-		if(num==1){
-			if(direction){
-				brightness++;
-				if(brightness>=1000){
-					direction=0;
-				}
-			}else{
-				brightness--;
-				if(brightness==0){
-					direction=1;
-				}
+	if(led_on){
+		if(direction){
+			brightness++;
+			if(brightness>=1000){
+				direction=0;
 			}
+		}else{
+			brightness--;
+			if(brightness==0){
+				direction=1;
+			}
+		}
 		
+	Set_PWM_DutyCycle(brightness);
+	Delay_ms(1);
+	}else{
+		brightness=0;
 		Set_PWM_DutyCycle(brightness);
 		Delay_ms(1);
-		}else{
-			brightness=0;
-			Set_PWM_DutyCycle(brightness);
-			Delay_ms(1);
-			direction=1;
-		}
+		direction=1;
 	}
 }
 
@@ -72,10 +69,10 @@ int main(void)
 {
 	Key_Init();
 	TIM_PWM_Init(1000-1,72-1);
-    
-	Breathing_Light();
-	
     while (1)
     {
+		if(GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_11)==0) led_on=!led_on;
+		Breathing_Light();
+		Delay_ms(500);
     }
 }
