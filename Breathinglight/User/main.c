@@ -73,6 +73,6 @@ int main(void)
     {
 		if(GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_11)==0) led_on=!led_on;
 		Breathing_Light();
-		Delay_ms(500);
+		Delay_us(500);
     }
 }
