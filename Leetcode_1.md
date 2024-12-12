@@ -314,3 +314,45 @@ void backtrack(char* digits,int index,char* combination,char** ret){
     }
 }
 ```
+# 合并k个链表
+重置的重要性
+-
+```
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* mergeKLists(struct ListNode** lists, int listsSize) {
+    struct ListNode* head = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* ret = head;
+    int minnum = -1;
+    int min=INT_MAX;
+    int isprime;
+    do{
+        isprime=0;
+        min=INT_MAX;  ////
+        minnum = -1;  ////必须要加
+        for (int i = 0; i < listsSize; i++) {
+            if (lists[i] != NULL) {
+                isprime=1;
+                if ((lists[i]->val) < min) {
+                    min = lists[i]->val;
+                    minnum = i;
+                }
+            }
+        }
+        if(isprime){
+            head->next = lists[minnum];
+            lists[minnum] = lists[minnum]->next;
+            head = head->next;
+        }
+    }while(isprime);
+    head->next=NULL;    ////
+    return ret->next;
+}
+/*重置的重要性*/
+```
+***还需注意链表的最后一个节点一定为NULL***
