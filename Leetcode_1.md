@@ -356,3 +356,33 @@ struct ListNode* mergeKLists(struct ListNode** lists, int listsSize) {
 /*重置的重要性*/
 ```
 ***还需注意链表的最后一个节点一定为NULL***
+# 非递减数组中查找元素的第一和最后位置
+```
+class Solution {
+public:
+    int lower(vector<int>& nums,int target){
+        int left=0;
+        int right=nums.size()-1;
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            if(nums[mid]>=target){
+                right=mid-1;
+            }else{
+                left=mid+1;
+            }
+        }
+        return left;
+    }
+    
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int start=lower(nums,target);
+        if(start>=nums.size()||nums[start]!=target){
+            return {-1,-1};
+        }
+        int end=lower(nums,target+1)-1;
+        return {start,end};
+    }
+};
+```
+**红蓝染色法**
+**一直为闭区间查找**
