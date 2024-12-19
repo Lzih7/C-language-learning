@@ -437,3 +437,30 @@ public:
 };
 ```
 **注意如何去重**
+# 二分
+不单独处理mid
+-
+```
+/*终止状态的考虑：right移动在left左边*/
+/*向下取整，确保right值”不动“*/
+/*特殊情况检验，纸笔*/
+
+/*全取等，left条件更苛刻*/
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int left=0,right=nums.size()-1;
+        int mid=0;
+        while(left<=right){
+            mid=left+(right-left)/2;
+            if(nums[mid]>=target){
+                right=mid-1;
+            }else{
+                left=mid+1;
+            }
+        }
+        return left;
+    }
+};
+```
+**一定熟记**
