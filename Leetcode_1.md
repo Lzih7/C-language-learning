@@ -1,4 +1,4 @@
-# 动态分配空间
+# 两数之和 动态分配空间
 1. 返回一个数组是需要给数组动态分配空间，**否则return时会清楚该内存**
 2. malloc在stdlib中，需在适当时free
 ```
@@ -19,6 +19,25 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
     }
     return NULL;
 }
+```
+3. 哈希表的写法
+```
+/*此哈希表中，数值为键，索引为值*/
+/*每个遍历过的值都会存入哈希表中，等待之后的查找*/
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,int> hashtable;
+        for(int i=0;i<nums.size();i++){
+            auto it=hashtable.find(target-nums[i]);
+            if(it!=hashtable.end()){
+                return {it->second,i};
+            }
+            hashtable[nums[i]]=i;  ////
+        }
+        return {};
+    }
+};
 ```
 # 链表使用
 1. 每个node->next都要动态分配空间，并且最后要用tail=tail->next;来保证循环
@@ -387,3 +406,34 @@ public:
 **红蓝染色法**
 
 **一直为闭区间查找**
+# 经典三数之和
+```
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int left=0,right=nums.size()-1;
+        vector<vector<int>> ret;
+        for(;left<nums.size()-2;left++){
+            int tmp=left+1;
+            right=nums.size()-1;
+            if(left>0&&nums[left]==nums[left-1]) continue;
+            while(tmp<right){
+                if(nums[left]+nums[tmp]+nums[right]==0){
+                    ret.push_back({nums[left],nums[tmp],nums[right]});
+                    while(tmp<right&&nums[tmp]==nums[tmp+1]) tmp++;
+                    while(tmp<right&&nums[right]==nums[right-1]) right--;
+                    ++tmp;
+                    --right;
+                }else if(nums[left]+nums[tmp]+nums[right]<0){
+                    tmp++;
+                }else{
+                    right--;
+                }
+            }
+        }
+        return ret;
+    }
+};
+```
+**注意如何去重**
