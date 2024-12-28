@@ -1,4 +1,4 @@
-# 动态分配空间
+# 两数之和 动态分配空间
 1. 返回一个数组是需要给数组动态分配空间，**否则return时会清楚该内存**
 2. malloc在stdlib中，需在适当时free
 ```
@@ -19,6 +19,25 @@ int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
     }
     return NULL;
 }
+```
+3. 哈希表的写法
+```
+/*此哈希表中，数值为键，索引为值*/
+/*每个遍历过的值都会存入哈希表中，等待之后的查找*/
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,int> hashtable;
+        for(int i=0;i<nums.size();i++){
+            auto it=hashtable.find(target-nums[i]);
+            if(it!=hashtable.end()){
+                return {it->second,i};
+            }
+            hashtable[nums[i]]=i;  ////
+        }
+        return {};
+    }
+};
 ```
 # 链表使用
 1. 每个node->next都要动态分配空间，并且最后要用tail=tail->next;来保证循环
@@ -314,3 +333,134 @@ void backtrack(char* digits,int index,char* combination,char** ret){
     }
 }
 ```
+# 合并k个链表
+重置的重要性
+-
+```
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* mergeKLists(struct ListNode** lists, int listsSize) {
+    struct ListNode* head = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* ret = head;
+    int minnum = -1;
+    int min=INT_MAX;
+    int isprime;
+    do{
+        isprime=0;
+        min=INT_MAX;  ////
+        minnum = -1;  ////必须要加
+        for (int i = 0; i < listsSize; i++) {
+            if (lists[i] != NULL) {
+                isprime=1;
+                if ((lists[i]->val) < min) {
+                    min = lists[i]->val;
+                    minnum = i;
+                }
+            }
+        }
+        if(isprime){
+            head->next = lists[minnum];
+            lists[minnum] = lists[minnum]->next;
+            head = head->next;
+        }
+    }while(isprime);
+    head->next=NULL;    ////
+    return ret->next;
+}
+/*重置的重要性*/
+```
+***还需注意链表的最后一个节点一定为NULL***
+# 非递减数组中查找元素的第一和最后位置
+```
+class Solution {
+public:
+    int lower(vector<int>& nums,int target){
+        int left=0;
+        int right=nums.size()-1;
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            if(nums[mid]>=target){
+                right=mid-1;
+            }else{
+                left=mid+1;
+            }
+        }
+        return left;
+    }
+    
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int start=lower(nums,target);
+        if(start>=nums.size()||nums[start]!=target){
+            return {-1,-1};
+        }
+        int end=lower(nums,target+1)-1;
+        return {start,end};
+    }
+};
+```
+**红蓝染色法**
+
+**一直为闭区间查找**
+# 经典三数之和
+```
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int left=0,right=nums.size()-1;
+        vector<vector<int>> ret;
+        for(;left<nums.size()-2;left++){
+            int tmp=left+1;
+            right=nums.size()-1;
+            if(left>0&&nums[left]==nums[left-1]) continue;
+            while(tmp<right){
+                if(nums[left]+nums[tmp]+nums[right]==0){
+                    ret.push_back({nums[left],nums[tmp],nums[right]});
+                    while(tmp<right&&nums[tmp]==nums[tmp+1]) tmp++;
+                    while(tmp<right&&nums[right]==nums[right-1]) right--;
+                    ++tmp;
+                    --right;
+                }else if(nums[left]+nums[tmp]+nums[right]<0){
+                    tmp++;
+                }else{
+                    right--;
+                }
+            }
+        }
+        return ret;
+    }
+};
+```
+**注意如何去重**
+# 二分
+不单独处理mid
+-
+```
+/*终止状态的考虑：right移动在left左边*/
+/*向下取整，确保right值”不动“*/
+/*特殊情况检验，纸笔*/
+
+/*全取等，left条件更苛刻*/
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int target) {
+        int left=0,right=nums.size()-1;
+        int mid=0;
+        while(left<=right){
+            mid=left+(right-left)/2;
+            if(nums[mid]>=target){
+                right=mid-1;
+            }else{
+                left=mid+1;
+            }
+        }
+        return left;
+    }
+};
+```
+**一定熟记**
