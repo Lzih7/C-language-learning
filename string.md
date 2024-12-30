@@ -60,3 +60,20 @@ void trim(char *s, char *t)
 ```
 + 这是void写法，无返回值
 + *t指向的位置无所谓
+### 后续main函数
+```
+int main()
+{
+    char s[MAXN + 1], t[MAXN + 1];
+
+    fgets(s, MAXN, stdin);
+    char *p = strchr(s, '\n');
+    if (p)
+        *p = '\0';
+
+    trim(s, t);
+    printf("(%s)\n", t);
+
+    return 0;
+}
+```
