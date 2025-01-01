@@ -63,10 +63,13 @@ bool solvequeen(int board[N][N],int row){
                 return true;  // 如果能成功放置所有皇后，返回 true
             }
 
-            board[row][col] = 0;  // 回溯，撤销放置 ,kol; 
+            board[row][col] = 0;  // 回溯，撤销放置; 
         }
     }
 
     return false;  // 无法放置皇后，返回 false
 }
 ```
++ **row从零开始**
++ **solvequeen()返回一个bool类型的值，表示在N*N的棋盘上是否存在**
++ **在print数组时，检测board[i][j]的值来判断输出什么值**
