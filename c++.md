@@ -26,6 +26,7 @@ float calculate(vector<float>& values);
 float calculate(const vector<float> values);  //则values不会被修改
 ```
 ## new 运算符
+动态分配空间
 ```
 char* p1=new char;  //未初始化
 int* p1=new int(2);
@@ -42,3 +43,45 @@ delate []p3;
 + 注：**定义的指向常量的指针必须用const修饰**
 ## 智能指针
 shared_ptr<int> pInt(new int(2));
+# 类
+```
+class{
+  public:
+  private:
+  protected:
+};
+```
+## 成员函数定义
+1. 在public里面直接定义
+2. 在外部定义(加上命名空间)
+
+通过成员函数访问private的变量，从而进行操作
+---
+## 类的使用
+1. 定义类的实例(对象)
+2. 用 . 来访问成员函数
+3. 动态创建的对象要通过delate释放
+```
+delate pShape;  //释放
+```
+## 构造函数
++ 可重载
++ 名字相同
++ 会默认生成
+### 拷贝构造函数
+```
+public:
+    Shape(const Shape& other);
+```
++ 会自动生成
+1. 赋值 shape2=shape1;
+2. 函数 shape1(shape1);
+## 析构函数
+对象销毁时执行的函数
+-
+```
+~Exanple(){
+    delate(pInt);
+}
+```
+可避免内存泄漏
