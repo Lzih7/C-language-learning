@@ -248,5 +248,262 @@ Python标准库`queue`模块提供了线程安全的队列实现，或者使用`
   ```python
   dq.pop()  # 从队尾删除
   ```
+# 构造函数
+在 Python 中，定义函数使用 `def` 关键字，后面跟函数名和参数列表，最后以冒号 `:` 结束。在函数体中编写具体的操作逻辑，函数体的代码块需要缩进。函数可以通过 `return` 返回结果，也可以不返回值。
 
-这些是Python中常见的数据结构和相关操作。如果你对某个数据结构有更详细的需求或问题，随时可以提问！
+### 基本语法
+```python
+def 函数名(参数1, 参数2, ...):
+    函数体
+    return 返回值  # 可选
+```
+---
+
+### 带参数的函数
+```python
+def add(a, b):
+    return a + b
+
+# 调用函数
+result = add(3, 5)
+print("结果是:", result)
+```
+
+输出：
+```
+结果是: 8
+```
+
+---
+
+### 带默认参数的函数
+```python
+def greet(name="世界"):
+    print(f"你好, {name}！")
+
+# 调用函数
+greet()           # 使用默认参数
+greet("小明")     # 覆盖默认参数
+```
+
+输出：
+```
+你好, 世界！
+你好, 小明！
+```
+
+---
+
+### 示例 4：可变参数的函数
+```python
+# *args 用于接收任意数量的位置参数
+def sum_numbers(*args):
+    return sum(args)
+
+print(sum_numbers(1, 2, 3, 4))  # 输出 10
+
+# **kwargs 用于接收任意数量的关键字参数
+def print_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+print_info(name="小红", age=18, city="上海")
+```
+
+输出：
+```
+10
+name: 小红
+age: 18
+city: 上海
+```
+
+---
+
+### 示例 5：嵌套函数
+```python
+def outer_function(text):
+    def inner_function():
+        print(f"内部函数打印: {text}")
+    inner_function()
+
+outer_function("嵌套函数示例")
+```
+
+输出：
+```
+内部函数打印: 嵌套函数示例
+```
+
+---
+
+### 示例 6：Lambda（匿名函数）
+```python
+# 定义一个简单的匿名函数
+add = lambda x, y: x + y
+print(add(3, 5))  # 输出 8
+```
+# 格式化字符串
+### 什么是 f-strings？
+
+f-strings 是格式化字符串的简称，表示在字符串前添加一个字母 `f` 或 `F`，然后在字符串内部通过大括号 `{}` 插入变量或表达式的值。
+
+---
+
+### 基本语法
+
+```python
+f"常规文本 {变量/表达式}"
+```
+
+- 字符串以 `f` 或 `F` 开头。
+- 在字符串中，大括号 `{}` 中可以包含变量名、表达式或函数调用。
+- Python 会自动将 `{}` 中的内容替换为它的值。
+
+---
+
+### 示例
+
+#### 1. 简单变量插值
+
+```python
+name = "Alice"
+age = 25
+print(f"My name is {name}, and I am {age} years old.")
+# 输出: My name is Alice, and I am 25 years old.
+```
+
+#### 2. 使用表达式
+
+```python
+x = 5
+y = 3
+print(f"The result of {x} + {y} is {x + y}.")
+# 输出: The result of 5 + 3 is 8.
+```
+
+#### 3. 函数调用
+
+```python
+def greet(name):
+    return f"Hello, {name}!"
+
+print(f"{greet('Alice')} Welcome to Python!")
+# 输出: Hello, Alice! Welcome to Python!
+```
+
+---
+
+### 字符串格式化的高级用法
+
+#### 1. 格式化数值
+
+- **小数位控制**
+
+```python
+pi = 3.14159
+print(f"Pi rounded to 2 decimal places: {pi:.2f}")
+# 输出: Pi rounded to 2 decimal places: 3.14
+```
+
+- **宽度和对齐**
+
+```python
+num = 42
+print(f"Right aligned: {num:>5}")
+print(f"Left aligned: {num:<5}")
+print(f"Center aligned: {num:^5}")
+# 输出:
+# Right aligned:    42
+# Left aligned: 42   
+# Center aligned:  42  
+```
+
+- **千分位分隔符**
+
+```python
+large_number = 1234567890
+print(f"Formatted with commas: {large_number:,}")
+# 输出: Formatted with commas: 1,234,567,890
+```
+
+---
+
+#### 2. 格式化字符串
+
+- **大写/小写转换 **
+
+```python
+name = "Alice"
+print(f"Uppercase: {name.upper()}")
+print(f"Lowercase: {name.lower()}")
+# 输出:
+# Uppercase: ALICE
+# Lowercase: alice
+```
+
+---
+
+#### 3. 嵌套表达式
+
+你可以在大括号内嵌套更复杂的表达式。
+
+```python
+x = 10
+y = 20
+print(f"The max of {x} and {y} is {max(x, y)}.")
+# 输出: The max of 10 and 20 is 20.
+```
+
+---
+
+### 转义大括号
+
+如果你想在 f-string 中显示大括号 `{}`，需要使用双大括号 `{{` 和 `}}` 进行转义。
+
+```python
+print(f"This is a literal brace: {{}}")
+# 输出: This is a literal brace: {}
+```
+
+---
+
+### 和其他格式化方式对比
+
+#### 1. `str.format()`
+
+`str.format()` 是 Python 早期的一种格式化方法：
+
+```python
+name = "Alice"
+age = 25
+print("My name is {}, and I am {} years old.".format(name, age))
+# 输出: My name is Alice, and I am 25 years old.
+```
+
+#### 2. `%` 操作符
+
+这是 Python 最老的一种格式化方法：
+
+```python
+name = "Alice"
+age = 25
+print("My name is %s, and I am %d years old." % (name, age))
+# 输出: My name is Alice, and I am 25 years old.
+```
+
+---
+
+### f-strings 的优点
+
+1. **语法简洁**：不需要引入额外的函数或符号。
+2. **性能更高**：相比 `str.format()` 和 `%` 操作符，f-strings 执行速度更快。
+3. **可读性强**：变量和表达式与字符串模板写在一起，更直观。
+
+---
+
+### 小结
+
+f-strings 是现代 Python 开发中首选的字符串格式化方式，特别适用于需要动态生成字符串的场景。通过大括号 `{}` 插入变量或表达式的值，可以快速、简洁地完成字符串操作。
+
+如果你有具体问题或更复杂的场景需要示例，可以随时告诉我！
