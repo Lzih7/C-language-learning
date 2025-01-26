@@ -183,22 +183,25 @@ public:
 ---
 + 组合
 ```
-/*经典的选或不选*/
 class Solution {
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
         vector<vector<int>> ans;
         vector<int> path;
-        int n=nums.size();
-        function<void(int)> dfs=[&](int i){
-            if(i==n){
+        int n = nums.size();
+        auto dfs = [&](this auto&& dfs, int i) -> void {
+            if (i == n) { // 子集构造完毕
                 ans.emplace_back(path);
                 return;
             }
-            dfs(i+1);
-            path.emplace_back(nums[i]);
-            dfs(i+1);
-            path.pop_back();
+
+            // 不选 nums[i]
+            dfs(i + 1);
+
+            // 选 nums[i]
+            path.push_back(nums[i]);
+            dfs(i + 1);
+            path.pop_back(); // 恢复现场
         };
         dfs(0);
         return ans;
