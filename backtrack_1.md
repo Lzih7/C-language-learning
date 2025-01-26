@@ -179,3 +179,31 @@ public:
 ```
 + 有两个"大if"-> **两个参**
 + 选或不选
+
+---
++ 组合
+```
+/*经典的选或不选*/
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> ans;
+        vector<int> path;
+        int n=nums.size();
+        function<void(int)> dfs=[&](int i){
+            if(i==n){
+                ans.emplace_back(path);
+                return;
+            }
+            dfs(i+1);
+            path.emplace_back(nums[i]);
+            dfs(i+1);
+            path.pop_back();
+        };
+        dfs(0);
+        return ans;
+    }
+};
+```
++ 选或不选
++ 无for循环(顺序无限制)
