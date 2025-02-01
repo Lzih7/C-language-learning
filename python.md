@@ -517,3 +517,126 @@ for i in range(2,6):  # 2 到 5
 for i in range(1,10,2):  # 1,3,5,7,9   2为步长
     print(i)
 ```
+## print 函数相关
+
+### 多个参数
+`print` 可以接受多个参数，默认情况下会**用空格分隔它们**：
+```python
+print("Hello", "World", 123)
+```
+输出：
+```
+Hello World 123
+```
+
+### `sep` 参数
+`sep` 参数用于指定多个参数之间的分隔符，默认是空格：
+```python
+print("Hello", "World", 123, sep="-")
+```
+输出：
+```
+Hello-World-123
+```
+
+### `end` 参数
+`end` 参数用于指定输出结束时的字符，默认是换行符 `\n`：
+```python
+print("Hello", end=" ")
+print("World")
+```
+输出：
+```
+Hello World
+```
+
+### 格式化输出
+`print` 可以与字符串格式化方法结合使用，如 `f-string`、`str.format()` 或 `%` 格式化：
+```python
+name = "Alice"
+age = 30
+print(f"{name} is {age} years old.")
+```
+输出：
+```
+Alice is 30 years old.
+```
+
+### 打印特殊字符
+你可以使用转义字符来打印特殊字符，如换行符 `\n`、制表符 `\t` 等：
+```python
+print("Line 1\nLine 2\tTabbed")
+```
+输出：
+```
+Line 1
+Line 2   Tabbed
+```
+
+### 打印原始字符串
+如果你不希望转义字符被解释，可以使用原始字符串（在字符串前加 `r`）：
+```python
+print(r"Line 1\nLine 2\tTabbed")
+```
+输出：
+```
+Line 1\nLine 2\tTabbed
+```
+
+### 打印到标准错误
+你可以将输出重定向到标准错误流 `sys.stderr`：
+```python
+import sys
+
+print("Error message", file=sys.stderr)
+```
+
+### 打印对象
+`print` 会自动调用对象的 `__str__` 方法来获取字符串表示：
+```python
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __str__(self):
+        return f"Person(name={self.name}, age={self.age})"
+
+p = Person("Alice", 30)
+print(p)
+```
+输出：
+```
+Person(name=Alice, age=30)
+```
+
+### 打印列表、字典等
+`print` 可以打印列表、字典等数据结构，默认会调用它们的 `__repr__` 方法：
+```python
+print([1, 2, 3])
+print({"name": "Alice", "age": 30})
+```
+输出：
+```
+[1, 2, 3]
+{'name': 'Alice', 'age': 30}
+```
+
+### 打印多行字符串
+你可以使用三引号 `"""` 或 `'''` 来打印多行字符串：
+```python
+print("""
+Line 1
+Line 2
+Line 3
+""")
+```
+输出：
+```
+Line 1
+Line 2
+Line 3
+```
+
+### 总结
+`print` 函数虽然简单，但通过合理使用其参数和功能，可以实现复杂的输出需求。掌握这些细节可以帮助你更好地控制输出格式和内容。
