@@ -507,3 +507,13 @@ print("My name is %s, and I am %d years old." % (name, age))
 f-strings 是现代 Python 开发中首选的字符串格式化方式，特别适用于需要动态生成字符串的场景。通过大括号 `{}` 插入变量或表达式的值，可以快速、简洁地完成字符串操作。
 
 如果你有具体问题或更复杂的场景需要示例，可以随时告诉我！
+### for循环
+```python
+for i in range(5):  # 0 到 4
+    print(i)
+
+for i in range(2,6):  # 2 到 5
+    print(i)
+for i in range(1,10,2):  # 1,3,5,7,9   2为步长
+    print(i)
+```
