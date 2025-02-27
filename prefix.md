@@ -65,3 +65,44 @@ print(range_sum(prefix, 1, 3))  # 输出: 9
 
 #### 7. 总结
 前缀和通过预处理数组，将区间和的查询时间从 \(O(n)\) 优化到 \(O(1)\)，特别适合处理多次区间查询的场景。掌握前缀和不仅能提升算法效率，还能为解决更复杂的问题打下基础。
+## 实例
+k倍数区间
+---
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int countSubarrays(vector<int>& arr, int k) {
+    unordered_map<int, int> prefixCount;
+    prefixCount[0] = 1;  // 前缀和为0的情况
+    long long prefixSum = 0;  // 使用 long long 防止溢出
+    int count = 0;
+
+    for (int num : arr) {
+        prefixSum += num;
+        int mod = (prefixSum) % k;  // 处理负数情况
+        if (prefixCount.find(mod) != prefixCount.end()) {
+            count += prefixCount[mod];
+            prefixCount[mod]++;
+        } else {
+            prefixCount[mod] = 1;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    int n, k;
+    cin >> n >> k;
+    vector<int> arr(n);
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int result = countSubarrays(arr, k);
+    cout << result << endl;
+
+    return 0;
+}
+```
