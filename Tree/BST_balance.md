@@ -58,3 +58,52 @@ Node* leftRotate(Node* x) {
 - **再左旋根节点 X**
 
 ---
+## 高度计算
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct TreeNode {
+    int val;
+    struct TreeNode* left;
+    struct TreeNode* right;
+} TreeNode;
+
+// 递归计算二叉树高度
+int treeHeight(TreeNode* root) {
+    if (root == NULL) return -1; // 或者返回 0，取决于定义
+    int leftHeight = treeHeight(root->left);
+    int rightHeight = treeHeight(root->right);
+    return (leftHeight > rightHeight ? leftHeight : rightHeight) + 1;
+}
+
+// 创建新节点
+TreeNode* createNode(int val) {
+    TreeNode* node = (TreeNode*)malloc(sizeof(TreeNode));
+    node->val = val;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+int main() {
+    // 手动构建一个简单的二叉树
+    TreeNode* root = createNode(1);
+    root->left = createNode(2);
+    root->right = createNode(3);
+    root->left->left = createNode(4);
+    root->left->right = createNode(5);
+
+    printf("二叉树的高度: %d\n", treeHeight(root));
+
+    // 释放内存
+    free(root->left->left);
+    free(root->left->right);
+    free(root->left);
+    free(root->right);
+    free(root);
+
+    return 0;
+}
+
+```
