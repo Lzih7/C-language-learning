@@ -1,17 +1,19 @@
 #include "stm32f10x.h" 
 #include "Delay.h"
+#include "OLED.H"
+#include "MyI2C.h"
 
 int main(void)
 {
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);   
-    GPIO_InitTypeDef GPIO_InitStruct;   
-    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;    
-    GPIO_InitStruct.GPIO_Pin = GPIO_Pin_13;
-    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_50MHz;
-    
-    GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-    
+	OLED_Init();
+	MyI2C_Init();
+	MyI2C_Start();
+	
+	MyI2C_SendByte(0xD0);
+	uint8_t Ack=MyI2C_ReceiveAck();
+	MyI2C_Stop();
+	
+	OLED_ShowNum(1,1,Ack,3);
     while (1)
     {
 		
