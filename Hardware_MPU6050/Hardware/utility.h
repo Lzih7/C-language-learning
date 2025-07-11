@@ -10,7 +10,7 @@
         GPIO_InitStructure.GPIO_Speed = _Speed;   \
         GPIO_Init(GPIOx, &GPIO_InitStructure);    \
     } while (0)
-	
+
 #define TIM_BASE_CFG(_TIMX, _Period, _Prescaler, _ClockDivision, _CounterMode) \
     do                                                                              \
     {                                                                               \
@@ -21,7 +21,7 @@
         TIM_TimeBaseStructure.TIM_CounterMode = _CounterMode;                       \
         TIM_TimeBaseInit(_TIMX, &TIM_TimeBaseStructure);                            \
     } while (0)
-	
+
 #define TIM_PWM_CFG(_TIMX, _OCX, _OCMode, _OutputState, _Pulse, _OCPolarity) \
     do                                                                            \
     {                                                                             \
@@ -32,7 +32,7 @@
         TIM_OCInitStructure.TIM_OCPolarity = _OCPolarity;                         \
         TIM_OC##_OCX##Init(_TIMX, &TIM_OCInitStructure);                          \
     } while (0)
-	
+
 #define EXTI_CFG(_LINE, _MODE, _Trigger, _LineCmd) \
     do                                                  \
     {                                                   \
@@ -43,7 +43,7 @@
         EXTI_InitStructure.EXTI_LineCmd = _LineCmd;     \
         EXTI_Init(&EXTI_InitStructure);                 \
     } while (0)	
-	
+
 #define NVIC_CFG(_Channel, _PreemptionPriority, _SubPriority, _Cmd)            \
     do                                                                              \
     {                                                                               \
@@ -54,6 +54,5 @@
         NVIC_InitStructure.NVIC_IRQChannelCmd = _Cmd;                               \
         NVIC_Init(&NVIC_InitStructure);                                             \
     } while (0)	
-	
+
 #endif
-	

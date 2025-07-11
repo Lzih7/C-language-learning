@@ -9,11 +9,11 @@ void MPU6050_WriteReg(uint8_t RegAddress, uint8_t Data)
 	while(I2C_CheckEvent(I2C2,I2C_EVENT_MASTER_MODE_SELECT)!=SUCCESS);
 	I2C_Send7bitAddress(I2C2,MPU6050_ADDRESS,I2C_Direction_Transmitter);
 	while(I2C_CheckEvent(I2C2,I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED)!=SUCCESS);
-	I2C_SendData(I2C2,RegAddress);
+	I2C_SendData(I2C2,RegAddress); // 在从机地址传世完成后触发
 	while(I2C_CheckEvent(I2C2,I2C_EVENT_MASTER_BYTE_TRANSMITTING)!=SUCCESS);
-	I2C_SendData(I2C2,Data);
+	I2C_SendData(I2C2,Data); // 在DR为空时触发
 	while(I2C_CheckEvent(I2C2,I2C_EVENT_MASTER_BYTE_TRANSMITTED)!=SUCCESS);
-	I2C_GenerateSTOP(I2C2,ENABLE);
+	I2C_GenerateSTOP(I2C2,ENABLE); // 在数据传输完成后触发
 }
 
 void MPU6050_Init(void)
@@ -44,19 +44,24 @@ void MPU6050_Init(void)
 
 uint8_t MPU6050_ReadReg(uint8_t RegAddress)
 {
-//	MyI2C_Start();
-//	MyI2C_SendByte(MPU6050_ADDRESS);
-//	MyI2C_ReceiveAck();
-//	MyI2C_SendByte(RegAddress);
-//	MyI2C_ReceiveAck();
-//	
-//	MyI2C_Start();
-//	MyI2C_SendByte(MPU6050_ADDRESS | 0x01); //读取从机数据
-//	MyI2C_ReceiveAck();
-//	uint8_t data;
-//	data=MyI2C_ReceiveByte();
-//	MyI2C_SendAck(1);
-//	MyI2C_Stop();
+	uint8_t data;
+	I2C_GenerateSTART(I2C2,ENABLE);
+	while(I2C_CheckEvent(I2C2,I2C_EVENT_MASTER_MODE_SELECT)!=SUCCESS);
+	I2C_Send7bitAddress(I2C2,MPU6050_ADDRESS,I2C_Direction_Transmitter);
+	while(I2C_CheckEvent(I2C2,I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED)!=SUCCESS); //第一步还是先发送寄存器的地址数据
+	I2C_SendData(I2C2,RegAddress);
+	while(I2C_CheckEvent(I2C2,I2C_EVENT_MASTER_BYTE_TRANSMITTED)!=SUCCESS);
+	
+	I2C_GenerateSTART(I2C2,ENABLE);
+	while(I2C_CheckEvent(I2C2,I2C_EVENT_MASTER_MODE_SELECT)!=SUCCESS);
+	I2C_Send7bitAddress(I2C2,MPU6050_ADDRESS,I2C_Direction_Receiver);
+	while(I2C_CheckEvent(I2C2,I2C_EVENT_MASTER_RECEIVER_MODE_SELECTED)!=SUCCESS);
+	I2C_AcknowledgeConfig(I2C2,DISABLE);
+	I2C_GenerateSTOP(I2C2,ENABLE);
+	while(I2C_CheckEvent(I2C2,I2C_EVENT_MASTER_BYTE_RECEIVED)!=SUCCESS);
+	data=I2C_ReceiveData(I2C2);
+	I2C_AcknowledgeConfig(I2C2,ENABLE);
+	
 	return data;
 }
 

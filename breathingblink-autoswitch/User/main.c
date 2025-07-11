@@ -36,7 +36,7 @@ void prepare(void){
 	TIM_BASE_CFG(TIM3,50000-1,7200-1,TIM_CKD_DIV1,TIM_CounterMode_Up);
 	TIM_ITConfig(TIM3,TIM_IT_Update,ENABLE);
 	TIM_ClearITPendingBit(TIM3,TIM_IT_Update);
-	TIM_Cmd(TIM3,DISABLE);
+	TIM_Cmd(TIM3,DISABLE); // 先失能
 	NVIC_CFG(TIM3_IRQn,0,0,ENABLE);
 }
 
