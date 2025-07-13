@@ -25,7 +25,7 @@ void prepare(void){
 	
 	TIM_Cmd(TIM2,ENABLE);//配置TIM2用于PWM
 	
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO,ENABLE); // 引脚复用，为选择中断源做准备
 	GPIO_EXTILineConfig(GPIO_PortSourceGPIOB,GPIO_PinSource0); //PB0为中断源
 	EXTI_CFG(EXTI_Line0,EXTI_Mode_Interrupt,EXTI_Trigger_Falling,ENABLE);
 	NVIC_CFG(EXTI0_IRQn,0,0,ENABLE);
