@@ -1,31 +1,16 @@
 {
     "configurations": [
         {
-            "name": "Win32",
-            "includePath": [
-                "${workspaceFolder}/**"
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            "windowsSdkVersion": "10.0.22621.0",
-            "compilerPath": "C:/mingw64/bin/gcc.exe",
-            "cStandard": "c17",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "windows-gcc-x64"
-        },
-        {
             "name": "Target 1",
             "includePath": [
-                "d:\\github\\C-language-learning\\DMA_Transport\\Start",
-                "d:\\github\\C-language-learning\\DMA_Transport\\User",
-                "d:\\github\\C-language-learning\\DMA_Transport\\Library",
-                "d:\\github\\C-language-learning\\DMA_Transport\\Hardware",
-                "d:\\github\\C-language-learning\\DMA_Transport\\System",
+                "d:\\github\\C-language-learning\\Hardware_MPU6050\\Start",
+                "d:\\github\\C-language-learning\\Hardware_MPU6050\\User",
+                "d:\\github\\C-language-learning\\Hardware_MPU6050\\Library",
+                "d:\\github\\C-language-learning\\Hardware_MPU6050\\System",
+                "d:\\github\\C-language-learning\\Hardware_MPU6050\\Hardware",
                 "C:\\Keil_v5\\ARM\\ARMCC\\include",
-                "C:\\Keil_v5\\ARM\\ARMCC\\include\\rw"
+                "C:\\Keil_v5\\ARM\\ARMCC\\include\\rw",
+                "d:\\github\\C-language-learning\\breathingblink-autoswitch\\Hardware"
             ],
             "defines": [
                 "USE_STDPERIPH_DRIVER",

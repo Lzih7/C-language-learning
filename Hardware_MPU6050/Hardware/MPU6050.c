@@ -9,7 +9,7 @@ void MPU6050_WriteReg(uint8_t RegAddress, uint8_t Data)
 	while(I2C_CheckEvent(I2C2,I2C_EVENT_MASTER_MODE_SELECT)!=SUCCESS);
 	I2C_Send7bitAddress(I2C2,MPU6050_ADDRESS,I2C_Direction_Transmitter);
 	while(I2C_CheckEvent(I2C2,I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED)!=SUCCESS);
-	I2C_SendData(I2C2,RegAddress); // 在从机地址传世完成后触发
+	I2C_SendData(I2C2,RegAddress); // 在从机地址传输完成后触发
 	while(I2C_CheckEvent(I2C2,I2C_EVENT_MASTER_BYTE_TRANSMITTING)!=SUCCESS);
 	I2C_SendData(I2C2,Data); // 在DR为空时触发
 	while(I2C_CheckEvent(I2C2,I2C_EVENT_MASTER_BYTE_TRANSMITTED)!=SUCCESS);
