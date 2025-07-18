@@ -18,7 +18,7 @@ int main(void)
 		DataA[1]++;
 		DataA[2]++;
 		DataA[3]++;
-		
+		Delay_ms(50);
 		OLED_ShowHexNum(1,1,DataA[0],2);
 		OLED_ShowHexNum(1,4,DataA[1],2);
 		OLED_ShowHexNum(1,7,DataA[2],2);

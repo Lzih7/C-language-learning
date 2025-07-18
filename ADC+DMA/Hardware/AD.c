@@ -21,7 +21,7 @@ void AD_Init(void)
 	ADC_InitTypeDef ADC_InitStructure;
 	ADC_InitStructure.ADC_Mode=ADC_Mode_Independent;
 	ADC_InitStructure.ADC_DataAlign=ADC_DataAlign_Right;
-	ADC_InitStructure.ADC_ExternalTrigConv=ADC_ExternalTrigConv_None; //有内部软件触发，不需外部触发
+	ADC_InitStructure.ADC_ExternalTrigConv=ADC_ExternalTrigConv_None; //由内部软件触发，不需外部触发
 	ADC_InitStructure.ADC_NbrOfChannel=4;
 	ADC_InitStructure.ADC_ContinuousConvMode=ENABLE;
 	ADC_InitStructure.ADC_ScanConvMode=ENABLE;
@@ -36,5 +36,5 @@ void AD_Init(void)
 	ADC_StartCalibration(ADC1);
 	while(ADC_GetCalibrationStatus(ADC1)==SET);
 	
-	ADC_SoftwareStartConvCmd(ADC1,ENABLE);
+	ADC_SoftwareStartConvCmd(ADC1,ENABLE); // 此处实现内部软件触发
 }
