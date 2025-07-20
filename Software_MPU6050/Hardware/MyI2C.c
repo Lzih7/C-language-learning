@@ -61,7 +61,7 @@ uint8_t MyI2C_ReceiveByte(void)
 {
 	uint8_t i;
 	uint8_t Byte=0x00;
-	MyI2C_W_SDA(1);
+	MyI2C_W_SDA(1); // 在接收数据之前 主机先释放SDA
 	for(i=0;i<8;i++){
 		MyI2C_W_SCL(1);
 		if(MyI2C_R_SDA()==1) Byte|=(0x80 >> i);
