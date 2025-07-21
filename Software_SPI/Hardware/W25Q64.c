@@ -44,6 +44,7 @@ void W25Q64_PageProgram(uint32_t Address, uint8_t *Data, uint16_t Count)
     W25Q64_WriteEnable();
     MySPI_Start();
     uint16_t i;
+    MySPI_SwapByte(W25Q64_PAGE_PROGRAM);
     MySPI_SwapByte(Address >> 16);
     MySPI_SwapByte(Address >> 8);
     MySPI_SwapByte(Address);

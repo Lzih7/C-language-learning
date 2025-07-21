@@ -748,7 +748,7 @@ I (.\Library\stm32f10x_tim.h)(0x67024A74)
 I (.\Library\stm32f10x_usart.h)(0x67024A74)
 I (.\Library\stm32f10x_wwdg.h)(0x67024A74)
 I (.\Library\misc.h)(0x67024A73)
-F (.\User\main.c)(0x687A5E96)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\System -I .\Hardware-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\User\main.c)(0x687DBDB0)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\System -I .\Hardware-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (.\Start\stm32f10x.h)(0x67024A74)
 I (.\Start\core_cm3.h)(0x67024A74)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588B8344)
@@ -778,7 +778,9 @@ I (.\Library\stm32f10x_usart.h)(0x67024A74)
 I (.\Library\stm32f10x_wwdg.h)(0x67024A74)
 I (.\Library\misc.h)(0x67024A73)
 I (.\System\Delay.h)(0x68689E7F)
-I (.\Hardware\OLED.H)(0x616ED05C)
+I (.\Hardware\OLED.h)(0x616ED05C)
+I (.\Hardware\W25Q64.h)(0x687D067C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588B8344)
 F (.\User\stm32f10x_conf.h)(0x67024A74)()
 F (.\User\stm32f10x_it.c)(0x67024A74)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\System -I .\Hardware-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\stm32f10x_it.o --omf_browse .\objects\stm32f10x_it.crf --depend .\objects\stm32f10x_it.d)
 I (User\stm32f10x_it.h)(0x67024A74)
@@ -934,7 +936,7 @@ I (..\breathingblink-autoswitch\Hardware\OLED_Font.h)(0x61683CCA)
 F (..\breathingblink-autoswitch\Hardware\OLED.h)(0x616ED05C)()
 F (..\breathingblink-autoswitch\Hardware\OLED_Font.h)(0x61683CCA)()
 F (.\Hardware\utility.h)(0x687A5A75)()
-F (.\Hardware\MySPI.c)(0x687C748E)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\System -I .\Hardware-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\myspi.o --omf_browse .\objects\myspi.crf --depend .\objects\myspi.d)
+F (.\Hardware\MySPI.c)(0x687DB4B4)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\System -I .\Hardware-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\myspi.o --omf_browse .\objects\myspi.crf --depend .\objects\myspi.d)
 I (.\Start\stm32f10x.h)(0x67024A74)
 I (.\Start\core_cm3.h)(0x67024A74)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588B8344)
@@ -964,8 +966,8 @@ I (.\Library\stm32f10x_usart.h)(0x67024A74)
 I (.\Library\stm32f10x_wwdg.h)(0x67024A74)
 I (.\Library\misc.h)(0x67024A73)
 I (Hardware\utility.h)(0x687A5A75)
-F (.\Hardware\MySPI.h)(0x687CF99C)()
-F (.\Hardware\W25Q64.c)(0x687CEBB9)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\System -I .\Hardware-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\w25q64.o --omf_browse .\objects\w25q64.crf --depend .\objects\w25q64.d)
+F (.\Hardware\MySPI.h)(0x687DB2E2)()
+F (.\Hardware\W25Q64.c)(0x687DB620)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\System -I .\Hardware-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\w25q64.o --omf_browse .\objects\w25q64.crf --depend .\objects\w25q64.d)
 I (.\Start\stm32f10x.h)(0x67024A74)
 I (.\Start\core_cm3.h)(0x67024A74)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588B8344)
@@ -994,7 +996,7 @@ I (.\Library\stm32f10x_tim.h)(0x67024A74)
 I (.\Library\stm32f10x_usart.h)(0x67024A74)
 I (.\Library\stm32f10x_wwdg.h)(0x67024A74)
 I (.\Library\misc.h)(0x67024A73)
-I (Hardware\MySPI.h)(0x687CF99C)
+I (Hardware\MySPI.h)(0x687DB2E2)
 I (Hardware\W25Q64_Ins.h)(0x687C748E)
-F (.\Hardware\W25Q64.h)(0x687CFA4F)()
+F (.\Hardware\W25Q64.h)(0x687D067C)()
 F (.\Hardware\W25Q64_Ins.h)(0x687C748E)()

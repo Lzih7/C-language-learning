@@ -48,7 +48,7 @@ uint8_t MySPI_SwapByte(uint8_t ByteSend)
     uint8_t i, ByteReceive = 0x00;
     for (i = 0; i < 8; i++)
     {
-        MySPI_W_MOSI(ByteSend | (0x80 >> i));
+        MySPI_W_MOSI(ByteSend & (0x80 >> i));
         MySPI_W_SCK(1); // 移出数据
         if (MySPI_R_MISO() == 1)
         {
