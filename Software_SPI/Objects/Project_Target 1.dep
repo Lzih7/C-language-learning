@@ -967,7 +967,7 @@ I (.\Library\stm32f10x_wwdg.h)(0x67024A74)
 I (.\Library\misc.h)(0x67024A73)
 I (Hardware\utility.h)(0x687A5A75)
 F (.\Hardware\MySPI.h)(0x687DB2E2)()
-F (.\Hardware\W25Q64.c)(0x687E075D)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\System -I .\Hardware-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\w25q64.o --omf_browse .\objects\w25q64.crf --depend .\objects\w25q64.d)
+F (.\Hardware\W25Q64.c)(0x688B609F)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\User -I .\Library -I .\System -I .\Hardware-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\w25q64.o --omf_browse .\objects\w25q64.crf --depend .\objects\w25q64.d)
 I (.\Start\stm32f10x.h)(0x67024A74)
 I (.\Start\core_cm3.h)(0x67024A74)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588B8344)
