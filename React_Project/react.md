@@ -1,4 +1,6 @@
-# js
+## react的核心逻辑
+1. 组件化，组件名称首字母要大写，与html区分
+2. 与css结合，用`className`来指定css里的`class`
 ## 箭头函数 (=>)
 - => 是箭头函数（Arrow Function）的语法，是 ES6（ECMAScript 2015）引入的一种简洁的函数定义方式。
 
