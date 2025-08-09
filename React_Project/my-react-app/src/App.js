@@ -10,18 +10,12 @@ const user = {
 
 
 
-function Button() {
-  const [Count, setCount] = useState(0);
-  function handle_Click() {
-    setCount(Count + 1);
-    alert("按钮被点击了");
-  }
+function Button({Count, onClick}) {
   return(
     <div>
-      <button onClick = {handle_Click}>
-        这是一个按钮
+      <button onClick = {onClick}>
+        按钮被点击了 {Count} 次
       </button>
-      <p className="Count_text">按钮被点击了 {Count} 次</p>
     </div>
   );
 }
@@ -38,11 +32,19 @@ const listItems = products.map((products) =>
     {products.title}
   </li>
 )
+/*map()函数的参数是处理每个元素的回调函数*/
+
 function App() {
+  const [Count, setCount] = useState(0);
+  function handle_Click() {
+    setCount(Count + 1);
+    alert("按钮被点击了");
+  }
   return (
     <div>
-      <h2>欢迎来到我的React应用</h2>
-      <Button />
+      <h1>欢迎来到我的React应用</h1>
+      <Button Count={Count} onClick={handle_Click} />
+      <Button Count={Count} onClick={handle_Click} />
       <ul>{listItems}</ul>
     </div>
   );
