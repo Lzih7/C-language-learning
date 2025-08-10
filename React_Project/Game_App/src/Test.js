@@ -1,4 +1,4 @@
-import './App.css';
+import './Test.css';
 import {useState} from 'react';
 
 const myurl = "https://reactjs.org/logo-og.png";
@@ -9,7 +9,7 @@ const user = {
 };
 
 
-
+/** 传入的参数是一个对象，包含按钮的点击次数和点击事件处理函数两个属性 */
 function Button({Count, onClick}) {
   return(
     <div>
@@ -26,19 +26,19 @@ const products = [
   {title: "Apple", id: 3},
 ];
 
+/** style的两个括号：外层是 JSX，内层是一个对象 */
 const listItems = products.map((products) =>
   <li key = {products.id}
         style = {{color: "darkgreen", fontSize: "20px"}}>
     {products.title}
   </li>
 )
-/*map()函数的参数是处理每个元素的回调函数*/
+/** map()函数的参数是处理每个元素的回调函数*/
 
 function App() {
   const [Count, setCount] = useState(0);
   function handle_Click() {
     setCount(Count + 1);
-    alert("按钮被点击了");
   }
   return (
     <div>
