@@ -3,11 +3,11 @@
         {
             "name": "Target 1",
             "includePath": [
-                "d:\\github\\C-language-learning\\breathingblink-autoswitch\\Start",
-                "d:\\github\\C-language-learning\\breathingblink-autoswitch\\User",
-                "d:\\github\\C-language-learning\\breathingblink-autoswitch\\Library",
-                "d:\\github\\C-language-learning\\breathingblink-autoswitch\\Hardware",
-                "d:\\github\\C-language-learning\\breathingblink-autoswitch\\System",
+                "d:\\github\\C-language-learning\\Motor\\Start",
+                "d:\\github\\C-language-learning\\Motor\\User",
+                "d:\\github\\C-language-learning\\Motor\\Library",
+                "d:\\github\\C-language-learning\\Motor\\Hardware",
+                "d:\\github\\C-language-learning\\Motor\\System",
                 "C:\\Keil_v5\\ARM\\ARMCC\\include",
                 "C:\\Keil_v5\\ARM\\ARMCC\\include\\rw"
             ],

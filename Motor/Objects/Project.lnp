@@ -30,6 +30,7 @@
 ".\objects\key.o"
 ".\objects\led.o"
 ".\objects\oled.o"
+".\objects\tb6612fng.o"
 ".\objects\delay.o"
 --strict --scatter ".\Objects\Project.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
