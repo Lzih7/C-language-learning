@@ -3,6 +3,7 @@
         "stm32f10x.h": "c",
         "stm32_util.h": "c",
         "string.h": "c",
-        "cstdint": "c"
+        "cstdint": "c",
+        "ad.h": "c"
     }
 }
